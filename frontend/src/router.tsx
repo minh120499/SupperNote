@@ -2,6 +2,7 @@ import React from "react";
 
 import App from "./App";
 import { New } from "./New";
+import { Note } from "./pages/Note";
 import { Test } from "./Test";
 
 export interface AppRouters {
@@ -14,18 +15,20 @@ export interface AppRouters {
 export const routes: AppRouters[] = [
   {
     path: "/",
-    index: true,
     element: <App />,
-  },
-
-  {
-    path: "/news",
-    element: <New />,
     elements: [
       {
         path: "test",
         index: true,
         element: <Test />,
+      },
+      {
+        path: "news",
+        element: <New />,
+      },
+      {
+        path: "note",
+        element: <Note />,
       },
     ],
   },
