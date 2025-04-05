@@ -12,18 +12,23 @@ import react from "eslint-plugin-react";
 export default tseslint.config(
   { ignores: ["dist"] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended, eslintConfigPrettier],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended, "prettier"],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parser: tseslint.parser,
+      parserOptions: {
+        sourceType: "module",
+        project: "./tsconfig.json"
+      },
     },
     plugins: {
       react,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
       "simple-import-sort": simpleImportSort,
-      prettier,
+      // prettier,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
