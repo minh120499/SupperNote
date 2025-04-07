@@ -23,7 +23,7 @@ Ví dụ:
 Ví dụ:
 
 - She <b>eats</b> very much.
-- His brother <b>is graduating</b> from unniversity next mounth.
+- His brother <b>is graduating</b> from university next month.
 
 #### c. Tân từ (Object - O)
 
@@ -56,7 +56,7 @@ Ví dụ:
 
 Ví dụ:
 
-- <u>Yesterday</u> a new clothers shop war opened.
+- <u>Yesterday</u> a new clothes shop war opened.
 - I live <u>in the city</u>.
 
 ### 2. Các thành phần câu cơ bản.

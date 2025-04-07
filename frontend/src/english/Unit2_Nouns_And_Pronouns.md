@@ -1,4 +1,4 @@
-# Unit 2: Nouns & Pronuouns
+# Unit 2: Nouns & Pronouns
 
 ## I. Grammar
 
@@ -16,7 +16,7 @@
 > > a. Danh từ chung (common noun)  
 > > Ví dụ: sky, student, ...
 > >
-> > b. Danh từ riêng (poper noun)  
+> > b. Danh từ riêng (proper noun)  
 > > Ví dụ: Ha Noi, Viet Nam, ...
 > >
 > > c. Danh từ trừu tượng (abstract noun)  
@@ -40,13 +40,13 @@
 3. Nếu kết thúc là "**f / fe**" f => ves
     - wife => wives.
     - life => lives.
-    - thief = thievies.
-4. Nếu kết thúc là "**oof**" oof => oofs
+    - thief = thieves.
+4. Nếu kết thúc là "**oof**" oof => oof + s
     - roof => roofs.
     - proof => proofs.
 5. Danh từ bất quy tắc
     - child => children.
-    - preson => people.
+    - person => people.
     - man => man.
     - tooth => teeth.
 6. Danh từ vừa là số ít, vừa là số nhiều
@@ -54,7 +54,7 @@
     - craft (tàu).
     - aircraft (máy bay).
 7. Danh từ luôn là số nhiều
-    - clother (quần áo).
+    - clothes (quần áo).
     - police (cảnh sát).
     - pants (quần dài).
 8. Danh từ số ít kết thúc bằng "**s**"
@@ -85,7 +85,7 @@
 |          | Ngôi thứ hai  | You              | you     |
 |          | Ngôi thứ ba   | They             | them    |
 
-**I, You, He, She, It , We, They** có thể là chủ ngữ của **động từ (Verb)** hoặc thay thế cho dnah từ làm chủ ngữ.
+**I, You, He, She, It , We, They** có thể là chủ ngữ của **động từ (Verb)** hoặc thay thế cho danh từ làm chủ ngữ.
 
 - <u>**He**</u> has lived here for 3 years.
 - <u>**They**</u> often get up at 6 a.m.
@@ -177,8 +177,8 @@ Làm chủ ngữ:
 Làm tân ngữ của động từ:  
 **(Đại từ quan hệ + Chủ ngữ)**
 
-- The woman <u>**whom**</u> i saw yesterday is Mary's aunt.
-- The car <u>**which**</u> i am driving cost much.
+- The woman <u>**whom**</u> I saw yesterday is Mary's aunt.
+- The car <u>**which**</u> I am driving cost much.
 
 Hình thức sở hữu:  
 **(whose + danh từ)**
