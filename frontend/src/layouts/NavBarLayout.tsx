@@ -1,20 +1,41 @@
-import { Link, NavLink } from "react-router";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { navBarRouter, subMenuNavBarMap } from "@/routers/navbar-router";
+import { NavLink } from "react-router";
 
 const NavBarLayout = () => {
-  const style = {
-    display: "flex",
-    gap: 12,
-  };
-
   return (
-    <div style={style}>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/news">News</NavLink>
+    <NavigationMenu>
+      <NavigationMenuList>
+        {navBarRouter.map((navBar) => {
+          const subMenuNavBar = subMenuNavBarMap[navBar.path];
+          if (!subMenuNavBar)
+            return (
+              <NavLink to={navBar.path} key={navBar.path}>
+                <NavigationMenuItem>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>{navBar.label}</NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavLink>
+            );
 
-      <Link to="/news">News</Link>
-      <Link to="/test">Test</Link>
-      <Link to="/note">Note</Link>
-    </div>
+          return subMenuNavBar.map((subMenu) => (
+            <NavigationMenuItem key={subMenu.path}>
+              <NavigationMenuTrigger>{navBar.label}</NavigationMenuTrigger>
+              <NavLink to={subMenu.path} key={subMenu.path}>
+                <NavigationMenuContent>{subMenu.label}</NavigationMenuContent>
+              </NavLink>
+            </NavigationMenuItem>
+          ));
+        })}
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 };
 
