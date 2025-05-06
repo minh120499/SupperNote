@@ -12,12 +12,26 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as KnowledgeIndexImport } from './routes/knowledge/index'
+import { Route as AboutusIndexImport } from './routes/about_us/index'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const KnowledgeIndexRoute = KnowledgeIndexImport.update({
+  id: '/knowledge/',
+  path: '/knowledge/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutusIndexRoute = AboutusIndexImport.update({
+  id: '/about_us/',
+  path: '/about_us/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -32,6 +46,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/about_us/': {
+      id: '/about_us/'
+      path: '/about_us'
+      fullPath: '/about_us'
+      preLoaderRoute: typeof AboutusIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/knowledge/': {
+      id: '/knowledge/'
+      path: '/knowledge'
+      fullPath: '/knowledge'
+      preLoaderRoute: typeof KnowledgeIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +67,42 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about_us': typeof AboutusIndexRoute
+  '/knowledge': typeof KnowledgeIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about_us': typeof AboutusIndexRoute
+  '/knowledge': typeof KnowledgeIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/about_us/': typeof AboutusIndexRoute
+  '/knowledge/': typeof KnowledgeIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/about_us' | '/knowledge'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about_us' | '/knowledge'
+  id: '__root__' | '/' | '/about_us/' | '/knowledge/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutusIndexRoute: typeof AboutusIndexRoute
+  KnowledgeIndexRoute: typeof KnowledgeIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutusIndexRoute: AboutusIndexRoute,
+  KnowledgeIndexRoute: KnowledgeIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +115,19 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/about_us/",
+        "/knowledge/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/about_us/": {
+      "filePath": "about_us/index.tsx"
+    },
+    "/knowledge/": {
+      "filePath": "knowledge/index.tsx"
     }
   }
 }
