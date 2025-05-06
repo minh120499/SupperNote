@@ -2,17 +2,12 @@
   "framework": "react",
   "typescript": true,
   "projectName": "frontend",
-  "mode": "code-router",
-  "tailwind": true,
+  "mode": "file-router",
+  "tailwind": false,
   "packageManager": "pnpm",
   "toolchain": "eslint+prettier",
   "variableValues": {},
   "git": true,
   "version": 1,
-  "existingAddOns": [
-    "form",
-    "store",
-    "table",
-    "tanstack-query"
-  ]
+  "existingAddOns": []
 }

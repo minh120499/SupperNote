@@ -1,82 +1,37 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import {
-  Outlet,
-  RouterProvider,
-  createRootRoute,
-  createRoute,
-  createRouter,
-} from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import DemoFormAddress from './routes/demo.form.address'
-import DemoFormSimple from './routes/demo.form.simple'
-import DemoStore from './routes/demo.store'
-import DemoTable from './routes/demo.table'
-import DemoTanstackQuery from './routes/demo.tanstack-query'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 
-import Header from './components/Header'
-
-import TanstackQueryLayout from './integrations/tanstack-query/layout'
-
-import * as TanstackQuery from './integrations/tanstack-query/root-provider'
+// Import the generated route tree
+import { routeTree } from './routeTree.gen'
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 
-import App from './App.tsx'
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Header />
-      <Outlet />
-      <TanStackRouterDevtools />
-
-      <TanstackQueryLayout />
-    </>
-  ),
-})
-
-const indexRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/',
-  component: App,
-})
-
-const routeTree = rootRoute.addChildren([
-  indexRoute,
-  DemoFormAddress(rootRoute),
-  DemoFormSimple(rootRoute),
-  DemoStore(rootRoute),
-  DemoTable(rootRoute),
-  DemoTanstackQuery(rootRoute),
-])
-
+// Create a new router instance
 const router = createRouter({
   routeTree,
-  context: {
-    ...TanstackQuery.getContext(),
-  },
+  context: {},
   defaultPreload: 'intent',
   scrollRestoration: true,
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
 })
 
+// Register the router instance for type safety
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router
   }
 }
 
+// Render the app
 const rootElement = document.getElementById('app')
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <TanstackQuery.Provider>
-        <RouterProvider router={router} />
-      </TanstackQuery.Provider>
+      <RouterProvider router={router} />
     </StrictMode>,
   )
 }
