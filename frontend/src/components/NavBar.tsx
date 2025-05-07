@@ -1,34 +1,53 @@
 import { Link } from '@tanstack/react-router'
-import { MenuComponent } from './ui/MenuComponent'
-import MailOutlinedIcon from './icons/MailOutlinedIcon'
-import type { MenuComponentItemType } from './ui/MenuComponent'
+import { BookOutlined, HomeOutlined, IdcardOutlined } from '@ant-design/icons'
+import { Flex, Menu, Switch, Typography, type MenuProps } from 'antd'
+import { useAppContextStore } from '@/stores/useAppContextStore'
 
-const items: Array<MenuComponentItemType> = [
+type MenuItem = Required<MenuProps>['items'][number]
+
+const items: Array<MenuItem> = [
   {
     label: <Link to="/">Home</Link>,
     key: 'home',
-    icon: <MailOutlinedIcon />,
+    icon: <HomeOutlined />,
   },
   {
-    label: <Link to="/knowledge">Knowledge</Link>,
+    label: 'Knowledge',
     key: 'knowledge',
-    icon: <MailOutlinedIcon />,
+    icon: <BookOutlined />,
+    children: [
+      {
+        type: 'item',
+        label: <Link to="/knowledges/english">English</Link>,
+        key: 'english',
+      },
+      {
+        type: 'item',
+        label: <Link to="/knowledges/programming">Programming</Link>,
+        key: 'programming',
+      },
+    ],
   },
   {
     label: <Link to="/about_us">About us</Link>,
     key: 'aboutU  s',
-    icon: <MailOutlinedIcon />,
+    icon: <IdcardOutlined />,
   },
 ]
 
 export const NavBar = () => {
+  const { isDarkMode, toggleDarkMode } = useAppContextStore()
+
   return (
-    <div>
-      <MenuComponent items={items} />
-      {/* <p>Nav nè</p>
-      <Link to="/">Home</Link>
-      <Link to="/knowledge">Knowledge</Link>
-      <Link to="/about_us">About us</Link> */}
-    </div>
+    <Flex gap={8}>
+      <Menu mode="horizontal" items={items} style={{ flexGrow: 1 }} />
+      <Switch
+        checkedChildren="1"
+        unCheckedChildren="0"
+        value={isDarkMode}
+        onChange={toggleDarkMode}
+      />
+      <Typography>{isDarkMode + ''}</Typography>
+    </Flex>
   )
 }

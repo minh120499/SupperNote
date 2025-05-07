@@ -12,8 +12,11 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as KnowledgeIndexImport } from './routes/knowledge/index'
+import { Route as KnowledgesIndexImport } from './routes/knowledges/index'
+import { Route as FinancesIndexImport } from './routes/finances/index'
 import { Route as AboutusIndexImport } from './routes/about_us/index'
+import { Route as KnowledgesProgrammingImport } from './routes/knowledges/programming'
+import { Route as KnowledgesEnglishImport } from './routes/knowledges/english'
 
 // Create/Update Routes
 
@@ -23,15 +26,33 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const KnowledgeIndexRoute = KnowledgeIndexImport.update({
-  id: '/knowledge/',
-  path: '/knowledge/',
+const KnowledgesIndexRoute = KnowledgesIndexImport.update({
+  id: '/knowledges/',
+  path: '/knowledges/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FinancesIndexRoute = FinancesIndexImport.update({
+  id: '/finances/',
+  path: '/finances/',
   getParentRoute: () => rootRoute,
 } as any)
 
 const AboutusIndexRoute = AboutusIndexImport.update({
   id: '/about_us/',
   path: '/about_us/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const KnowledgesProgrammingRoute = KnowledgesProgrammingImport.update({
+  id: '/knowledges/programming',
+  path: '/knowledges/programming',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const KnowledgesEnglishRoute = KnowledgesEnglishImport.update({
+  id: '/knowledges/english',
+  path: '/knowledges/english',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,6 +67,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/knowledges/english': {
+      id: '/knowledges/english'
+      path: '/knowledges/english'
+      fullPath: '/knowledges/english'
+      preLoaderRoute: typeof KnowledgesEnglishImport
+      parentRoute: typeof rootRoute
+    }
+    '/knowledges/programming': {
+      id: '/knowledges/programming'
+      path: '/knowledges/programming'
+      fullPath: '/knowledges/programming'
+      preLoaderRoute: typeof KnowledgesProgrammingImport
+      parentRoute: typeof rootRoute
+    }
     '/about_us/': {
       id: '/about_us/'
       path: '/about_us'
@@ -53,11 +88,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutusIndexImport
       parentRoute: typeof rootRoute
     }
-    '/knowledge/': {
-      id: '/knowledge/'
-      path: '/knowledge'
-      fullPath: '/knowledge'
-      preLoaderRoute: typeof KnowledgeIndexImport
+    '/finances/': {
+      id: '/finances/'
+      path: '/finances'
+      fullPath: '/finances'
+      preLoaderRoute: typeof FinancesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/knowledges/': {
+      id: '/knowledges/'
+      path: '/knowledges'
+      fullPath: '/knowledges'
+      preLoaderRoute: typeof KnowledgesIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -67,42 +109,76 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/knowledges/english': typeof KnowledgesEnglishRoute
+  '/knowledges/programming': typeof KnowledgesProgrammingRoute
   '/about_us': typeof AboutusIndexRoute
-  '/knowledge': typeof KnowledgeIndexRoute
+  '/finances': typeof FinancesIndexRoute
+  '/knowledges': typeof KnowledgesIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/knowledges/english': typeof KnowledgesEnglishRoute
+  '/knowledges/programming': typeof KnowledgesProgrammingRoute
   '/about_us': typeof AboutusIndexRoute
-  '/knowledge': typeof KnowledgeIndexRoute
+  '/finances': typeof FinancesIndexRoute
+  '/knowledges': typeof KnowledgesIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/knowledges/english': typeof KnowledgesEnglishRoute
+  '/knowledges/programming': typeof KnowledgesProgrammingRoute
   '/about_us/': typeof AboutusIndexRoute
-  '/knowledge/': typeof KnowledgeIndexRoute
+  '/finances/': typeof FinancesIndexRoute
+  '/knowledges/': typeof KnowledgesIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about_us' | '/knowledge'
+  fullPaths:
+    | '/'
+    | '/knowledges/english'
+    | '/knowledges/programming'
+    | '/about_us'
+    | '/finances'
+    | '/knowledges'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about_us' | '/knowledge'
-  id: '__root__' | '/' | '/about_us/' | '/knowledge/'
+  to:
+    | '/'
+    | '/knowledges/english'
+    | '/knowledges/programming'
+    | '/about_us'
+    | '/finances'
+    | '/knowledges'
+  id:
+    | '__root__'
+    | '/'
+    | '/knowledges/english'
+    | '/knowledges/programming'
+    | '/about_us/'
+    | '/finances/'
+    | '/knowledges/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KnowledgesEnglishRoute: typeof KnowledgesEnglishRoute
+  KnowledgesProgrammingRoute: typeof KnowledgesProgrammingRoute
   AboutusIndexRoute: typeof AboutusIndexRoute
-  KnowledgeIndexRoute: typeof KnowledgeIndexRoute
+  FinancesIndexRoute: typeof FinancesIndexRoute
+  KnowledgesIndexRoute: typeof KnowledgesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KnowledgesEnglishRoute: KnowledgesEnglishRoute,
+  KnowledgesProgrammingRoute: KnowledgesProgrammingRoute,
   AboutusIndexRoute: AboutusIndexRoute,
-  KnowledgeIndexRoute: KnowledgeIndexRoute,
+  FinancesIndexRoute: FinancesIndexRoute,
+  KnowledgesIndexRoute: KnowledgesIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -116,18 +192,30 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/knowledges/english",
+        "/knowledges/programming",
         "/about_us/",
-        "/knowledge/"
+        "/finances/",
+        "/knowledges/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/knowledges/english": {
+      "filePath": "knowledges/english.tsx"
+    },
+    "/knowledges/programming": {
+      "filePath": "knowledges/programming.tsx"
+    },
     "/about_us/": {
       "filePath": "about_us/index.tsx"
     },
-    "/knowledge/": {
-      "filePath": "knowledge/index.tsx"
+    "/finances/": {
+      "filePath": "finances/index.tsx"
+    },
+    "/knowledges/": {
+      "filePath": "knowledges/index.tsx"
     }
   }
 }
