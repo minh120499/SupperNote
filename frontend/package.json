@@ -21,6 +21,7 @@
     "antd": "^5.24.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-highlight-words": "^0.21.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {
@@ -29,6 +30,7 @@
     "@testing-library/react": "^16.2.0",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
+    "@types/react-highlight-words": "^0.20.0",
     "@types/styled-components": "^5.1.34",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.0.0",

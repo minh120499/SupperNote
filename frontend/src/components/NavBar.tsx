@@ -6,10 +6,10 @@ import {
   MoonFilled,
   SunFilled,
 } from '@ant-design/icons'
-import { Card, Flex, Menu, Switch, Typography } from 'antd'
-import styled from 'styled-components'
+import { Flex, Menu, Switch, Typography } from 'antd'
 import type { MenuProps } from 'antd'
 import { useAppContextStore } from '@/stores/useAppContextStore'
+import { Box } from './ui/Box'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -47,7 +47,7 @@ export const NavBar = () => {
   const { isDarkMode, toggleDarkMode } = useAppContextStore()
 
   return (
-    <StyledCard style={{ borderRadius: 0, padding: 0 }}>
+    <Box>
       <Flex gap={8} style={{ padding: 0 }}>
         <Menu mode="horizontal" items={items} style={{ flexGrow: 1 }} />
         <Switch
@@ -58,13 +58,6 @@ export const NavBar = () => {
         />
         <Typography>{isDarkMode + ''}</Typography>
       </Flex>
-    </StyledCard>
+    </Box>
   )
 }
-
-const StyledCard = styled(Card)`
-  .ant-card-body {
-    border-radius: 0;
-    padding: 0;
-  }
-`
