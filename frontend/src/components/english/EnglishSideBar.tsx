@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from '@tanstack/react-router'
 import { Anchor, Typography } from 'antd'
 import { englishData } from './englishSideBarData'
+import { Fragment } from 'react/jsx-runtime'
 
 export const EnglishSideBar = () => {
   const navigate = useNavigate()
@@ -15,7 +16,7 @@ export const EnglishSideBar = () => {
     <div>
       {englishData.map((english) => {
         return (
-          <>
+          <Fragment key={english.title}>
             <Link
               to="/knowledges/english/$unit"
               params={{ unit: english.path }}
@@ -30,7 +31,7 @@ export const EnglishSideBar = () => {
                 onChange={() => onChange(english.path)}
               />
             )}
-          </>
+          </Fragment>
         )
       })}
 
