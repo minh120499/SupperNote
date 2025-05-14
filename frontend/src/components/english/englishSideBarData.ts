@@ -9,7 +9,7 @@ interface EnglishData {
 export const englishData: EnglishData[] = [
   {
     title: 'UNIT 1: Cấu trúc trong tiếng Anh',
-    path: 'unit_1',
+    path: 'Unit1_Sentence_Structures_In_English',
     tableOfContents: [
       {
         key: 'grammar',
@@ -87,7 +87,7 @@ export const englishData: EnglishData[] = [
   },
   {
     title: 'Unit 2: Nouns & Pronouns',
-    path: 'unit_2',
+    path: 'Unit2_Nouns_And_Pronouns',
     tableOfContents: [
       {
         key: 'grammar',

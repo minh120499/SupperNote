@@ -6,7 +6,7 @@ import {
   MoonFilled,
   SunFilled,
 } from '@ant-design/icons'
-import { Flex, Menu, Switch, Typography } from 'antd'
+import { Flex, Menu, Switch } from 'antd'
 import type { MenuProps } from 'antd'
 import { useAppContextStore } from '@/stores/useAppContextStore'
 import { Box } from './ui/Box'
@@ -56,7 +56,6 @@ export const NavBar = () => {
           value={isDarkMode}
           onChange={toggleDarkMode}
         />
-        <Typography>{isDarkMode + ''}</Typography>
       </Flex>
     </Box>
   )
