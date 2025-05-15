@@ -1,7 +1,5 @@
 import { Markdown } from '@/components/Markdown'
 import { useParams } from '@tanstack/react-router'
-import { Input } from 'antd'
-import { useState } from 'react'
 
 const posts = import.meta.glob('@/docs/english/*.md', {
   as: 'raw',

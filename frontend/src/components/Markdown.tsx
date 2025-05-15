@@ -7,8 +7,7 @@ import {
   KeyboardShortcut,
   useKeyboardShortcut,
 } from '@/hooks/useKeyboardShortcut'
-import { Input } from 'antd'
-import { debounce } from 'lodash'
+import { Input } from '@mantine/core'
 interface MarkdownProps {
   content?: string
 }
@@ -17,6 +16,7 @@ const MarkdownComponent = ({
   content = '# 404 - Không tìm thấy bài viết',
 }: MarkdownProps) => {
   const { usedShortKey } = useKeyboardShortcut()
+  const isOpenSearch = usedShortKey[KeyboardShortcut.SEARCH_SHORTCUT]
 
   const contentRef = useRef<HTMLDivElement>(null)
 
@@ -25,33 +25,32 @@ const MarkdownComponent = ({
   const [marks, setMarks] = useState<NodeListOf<HTMLElement>>()
 
   useEffect(() => {
-    if (searchWords && contentRef.current && content.length > 0) {
+    if (contentRef.current && content.length > 0) {
       const instance = new Mark(contentRef.current)
-      instance.unmark({
-        done: () => {
-          instance.mark(searchWords, { separateWordSearch: false })
-        },
-      })
+      if (!searchWords || isOpenSearch) {
+        instance.unmark()
+      } else {
+        instance.unmark({
+          done: () => {
+            instance.mark(searchWords, { separateWordSearch: false })
+          },
+        })
+      }
     }
   }, [searchWords, content])
 
-  const logSearch = debounce((query) => {
-    console.log('Tìm kiếm:', query)
-  }, 500)
-
-  console.log(usedShortKey)
-
   return (
     <div ref={contentRef}>
-      {usedShortKey[KeyboardShortcut.SEARCH_SHORTCUT] && (
+      {isOpenSearch && (
         <Input
+          autoFocus
           value={searchWords}
           onChange={(e) => {
             setSearchWords(e.target.value)
-            logSearch(e.target.value)
           }}
         />
       )}
+
       <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm]}>
         {content}
       </ReactMarkdown>

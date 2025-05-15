@@ -1,9 +1,7 @@
-import type { AnchorLinkItemProps } from 'antd/es/anchor/Anchor'
-
 interface EnglishData {
   title: string
   path: string
-  tableOfContents?: AnchorLinkItemProps[]
+  tableOfContents?: any[]
 }
 
 export const englishData: EnglishData[] = [

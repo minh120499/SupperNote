@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from '@tanstack/react-router'
-import { Anchor, Typography } from 'antd'
 import { englishData } from './englishSideBarData'
 import { Fragment } from 'react/jsx-runtime'
+import { TableOfContents, Text } from '@mantine/core'
 
 export const EnglishSideBar = () => {
   const navigate = useNavigate()
@@ -14,6 +14,21 @@ export const EnglishSideBar = () => {
 
   return (
     <div>
+      <TableOfContents
+        variant="filled"
+        color="blue"
+        size="sm"
+        radius="sm"
+        scrollSpyOptions={{
+          selector: '#mdx :is(h1, h2, h3, h4, h5, h6)',
+        }}
+        getControlProps={({ data }) => ({
+          onClick: () => data.getNode().scrollIntoView(),
+          children: data.value,
+        })}
+      />
+      <h1>ádf</h1>
+
       {englishData.map((english) => {
         return (
           <Fragment key={english.title}>
@@ -21,16 +36,16 @@ export const EnglishSideBar = () => {
               to="/knowledges/english/$unit"
               params={{ unit: english.path }}
             >
-              <Typography>{english.title}</Typography>
+              <Text>{english.title}</Text>
             </Link>
 
-            {english.tableOfContents && (
+            {/* {english.tableOfContents && (
               <Anchor
                 affix={false}
                 items={english.tableOfContents}
                 onChange={() => onChange(english.path)}
               />
-            )}
+            )} */}
           </Fragment>
         )
       })}
