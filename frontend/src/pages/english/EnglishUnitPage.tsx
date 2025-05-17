@@ -1,20 +1,16 @@
 import { EnglishSideBar } from '@/components/english/EnglishSideBar'
 import { Markdown } from '@/components/Markdown'
 import { englishUnits } from '@/data/english/englishUnitListData'
-import {
-  Anchor,
-  Box,
-  Breadcrumbs,
-  Flex,
-  Grid,
-  GridCol,
-  ScrollArea,
-  Text,
-} from '@mantine/core'
-import { Link, useParams } from '@tanstack/react-router'
+import { Anchor, Breadcrumbs, Grid, GridCol, ScrollArea } from '@mantine/core'
+import { useNavigate, useParams } from '@tanstack/react-router'
 
 export const EnglishUnitPage = () => {
   const { unit } = useParams({ strict: false })
+  const navigate = useNavigate()
+
+  const handleClick = (path: string) => {
+    navigate({ to: path })
+  }
 
   const file = `/src/docs/english/${unit}.md`
 
@@ -22,8 +18,8 @@ export const EnglishUnitPage = () => {
     <Grid>
       <GridCol span={12}>
         <Breadcrumbs>
-          <Anchor>
-            <Link to="/knowledges/english">English</Link>
+          <Anchor onClick={() => handleClick('/knowledges/english')}>
+            English
           </Anchor>
           <Anchor>{unit}</Anchor>
         </Breadcrumbs>
