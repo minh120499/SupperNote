@@ -15,9 +15,9 @@ import { Route as IndexImport } from './routes/index'
 import { Route as KnowledgesIndexImport } from './routes/knowledges/index'
 import { Route as FinancesIndexImport } from './routes/finances/index'
 import { Route as AboutusIndexImport } from './routes/about_us/index'
-import { Route as KnowledgesProgrammingImport } from './routes/knowledges/programming'
-import { Route as KnowledgesEnglishImport } from './routes/knowledges/english'
-import { Route as KnowledgesEnglishUnitImport } from './routes/knowledges/english.$unit'
+import { Route as KnowledgesProgrammingIndexImport } from './routes/knowledges/programming/index'
+import { Route as KnowledgesEnglishIndexImport } from './routes/knowledges/english/index'
+import { Route as KnowledgesEnglishUnitImport } from './routes/knowledges/english/$unit'
 
 // Create/Update Routes
 
@@ -45,22 +45,24 @@ const AboutusIndexRoute = AboutusIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const KnowledgesProgrammingRoute = KnowledgesProgrammingImport.update({
-  id: '/knowledges/programming',
-  path: '/knowledges/programming',
-  getParentRoute: () => rootRoute,
-} as any)
+const KnowledgesProgrammingIndexRoute = KnowledgesProgrammingIndexImport.update(
+  {
+    id: '/knowledges/programming/',
+    path: '/knowledges/programming/',
+    getParentRoute: () => rootRoute,
+  } as any,
+)
 
-const KnowledgesEnglishRoute = KnowledgesEnglishImport.update({
-  id: '/knowledges/english',
-  path: '/knowledges/english',
+const KnowledgesEnglishIndexRoute = KnowledgesEnglishIndexImport.update({
+  id: '/knowledges/english/',
+  path: '/knowledges/english/',
   getParentRoute: () => rootRoute,
 } as any)
 
 const KnowledgesEnglishUnitRoute = KnowledgesEnglishUnitImport.update({
-  id: '/$unit',
-  path: '/$unit',
-  getParentRoute: () => KnowledgesEnglishRoute,
+  id: '/knowledges/english/$unit',
+  path: '/knowledges/english/$unit',
+  getParentRoute: () => rootRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -72,20 +74,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/knowledges/english': {
-      id: '/knowledges/english'
-      path: '/knowledges/english'
-      fullPath: '/knowledges/english'
-      preLoaderRoute: typeof KnowledgesEnglishImport
-      parentRoute: typeof rootRoute
-    }
-    '/knowledges/programming': {
-      id: '/knowledges/programming'
-      path: '/knowledges/programming'
-      fullPath: '/knowledges/programming'
-      preLoaderRoute: typeof KnowledgesProgrammingImport
       parentRoute: typeof rootRoute
     }
     '/about_us/': {
@@ -111,105 +99,110 @@ declare module '@tanstack/react-router' {
     }
     '/knowledges/english/$unit': {
       id: '/knowledges/english/$unit'
-      path: '/$unit'
+      path: '/knowledges/english/$unit'
       fullPath: '/knowledges/english/$unit'
       preLoaderRoute: typeof KnowledgesEnglishUnitImport
-      parentRoute: typeof KnowledgesEnglishImport
+      parentRoute: typeof rootRoute
+    }
+    '/knowledges/english/': {
+      id: '/knowledges/english/'
+      path: '/knowledges/english'
+      fullPath: '/knowledges/english'
+      preLoaderRoute: typeof KnowledgesEnglishIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/knowledges/programming/': {
+      id: '/knowledges/programming/'
+      path: '/knowledges/programming'
+      fullPath: '/knowledges/programming'
+      preLoaderRoute: typeof KnowledgesProgrammingIndexImport
+      parentRoute: typeof rootRoute
     }
   }
 }
 
 // Create and export the route tree
 
-interface KnowledgesEnglishRouteChildren {
-  KnowledgesEnglishUnitRoute: typeof KnowledgesEnglishUnitRoute
-}
-
-const KnowledgesEnglishRouteChildren: KnowledgesEnglishRouteChildren = {
-  KnowledgesEnglishUnitRoute: KnowledgesEnglishUnitRoute,
-}
-
-const KnowledgesEnglishRouteWithChildren =
-  KnowledgesEnglishRoute._addFileChildren(KnowledgesEnglishRouteChildren)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/knowledges/english': typeof KnowledgesEnglishRouteWithChildren
-  '/knowledges/programming': typeof KnowledgesProgrammingRoute
   '/about_us': typeof AboutusIndexRoute
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
   '/knowledges/english/$unit': typeof KnowledgesEnglishUnitRoute
+  '/knowledges/english': typeof KnowledgesEnglishIndexRoute
+  '/knowledges/programming': typeof KnowledgesProgrammingIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/knowledges/english': typeof KnowledgesEnglishRouteWithChildren
-  '/knowledges/programming': typeof KnowledgesProgrammingRoute
   '/about_us': typeof AboutusIndexRoute
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
   '/knowledges/english/$unit': typeof KnowledgesEnglishUnitRoute
+  '/knowledges/english': typeof KnowledgesEnglishIndexRoute
+  '/knowledges/programming': typeof KnowledgesProgrammingIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/knowledges/english': typeof KnowledgesEnglishRouteWithChildren
-  '/knowledges/programming': typeof KnowledgesProgrammingRoute
   '/about_us/': typeof AboutusIndexRoute
   '/finances/': typeof FinancesIndexRoute
   '/knowledges/': typeof KnowledgesIndexRoute
   '/knowledges/english/$unit': typeof KnowledgesEnglishUnitRoute
+  '/knowledges/english/': typeof KnowledgesEnglishIndexRoute
+  '/knowledges/programming/': typeof KnowledgesProgrammingIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/knowledges/english'
-    | '/knowledges/programming'
     | '/about_us'
     | '/finances'
     | '/knowledges'
     | '/knowledges/english/$unit'
+    | '/knowledges/english'
+    | '/knowledges/programming'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/knowledges/english'
-    | '/knowledges/programming'
     | '/about_us'
     | '/finances'
     | '/knowledges'
     | '/knowledges/english/$unit'
+    | '/knowledges/english'
+    | '/knowledges/programming'
   id:
     | '__root__'
     | '/'
-    | '/knowledges/english'
-    | '/knowledges/programming'
     | '/about_us/'
     | '/finances/'
     | '/knowledges/'
     | '/knowledges/english/$unit'
+    | '/knowledges/english/'
+    | '/knowledges/programming/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  KnowledgesEnglishRoute: typeof KnowledgesEnglishRouteWithChildren
-  KnowledgesProgrammingRoute: typeof KnowledgesProgrammingRoute
   AboutusIndexRoute: typeof AboutusIndexRoute
   FinancesIndexRoute: typeof FinancesIndexRoute
   KnowledgesIndexRoute: typeof KnowledgesIndexRoute
+  KnowledgesEnglishUnitRoute: typeof KnowledgesEnglishUnitRoute
+  KnowledgesEnglishIndexRoute: typeof KnowledgesEnglishIndexRoute
+  KnowledgesProgrammingIndexRoute: typeof KnowledgesProgrammingIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  KnowledgesEnglishRoute: KnowledgesEnglishRouteWithChildren,
-  KnowledgesProgrammingRoute: KnowledgesProgrammingRoute,
   AboutusIndexRoute: AboutusIndexRoute,
   FinancesIndexRoute: FinancesIndexRoute,
   KnowledgesIndexRoute: KnowledgesIndexRoute,
+  KnowledgesEnglishUnitRoute: KnowledgesEnglishUnitRoute,
+  KnowledgesEnglishIndexRoute: KnowledgesEnglishIndexRoute,
+  KnowledgesProgrammingIndexRoute: KnowledgesProgrammingIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -223,24 +216,16 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/knowledges/english",
-        "/knowledges/programming",
         "/about_us/",
         "/finances/",
-        "/knowledges/"
+        "/knowledges/",
+        "/knowledges/english/$unit",
+        "/knowledges/english/",
+        "/knowledges/programming/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/knowledges/english": {
-      "filePath": "knowledges/english.tsx",
-      "children": [
-        "/knowledges/english/$unit"
-      ]
-    },
-    "/knowledges/programming": {
-      "filePath": "knowledges/programming.tsx"
     },
     "/about_us/": {
       "filePath": "about_us/index.tsx"
@@ -252,8 +237,13 @@ export const routeTree = rootRoute
       "filePath": "knowledges/index.tsx"
     },
     "/knowledges/english/$unit": {
-      "filePath": "knowledges/english.$unit.tsx",
-      "parent": "/knowledges/english"
+      "filePath": "knowledges/english/$unit.tsx"
+    },
+    "/knowledges/english/": {
+      "filePath": "knowledges/english/index.tsx"
+    },
+    "/knowledges/programming/": {
+      "filePath": "knowledges/programming/index.tsx"
     }
   }
 }

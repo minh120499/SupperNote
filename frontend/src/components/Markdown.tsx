@@ -7,7 +7,7 @@ import {
   KeyboardShortcut,
   useKeyboardShortcut,
 } from '@/hooks/useKeyboardShortcut'
-import { Input } from '@mantine/core'
+import { Box, Input } from '@mantine/core'
 interface MarkdownProps {
   content?: string
 }
@@ -21,14 +21,15 @@ const MarkdownComponent = ({
   const contentRef = useRef<HTMLDivElement>(null)
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [searchWords, setSearchWords] = useState('')
   const [marks, setMarks] = useState<NodeListOf<HTMLElement>>()
+  const [searchWords, setSearchWords] = useState('')
 
   useEffect(() => {
     if (contentRef.current && content.length > 0) {
       const instance = new Mark(contentRef.current)
-      if (!searchWords || isOpenSearch) {
+      if (!searchWords || !isOpenSearch) {
         instance.unmark()
+        setSearchWords('')
       } else {
         instance.unmark({
           done: () => {
@@ -37,10 +38,10 @@ const MarkdownComponent = ({
         })
       }
     }
-  }, [searchWords, content])
+  }, [searchWords, content, isOpenSearch])
 
   return (
-    <div ref={contentRef}>
+    <Box id="mdx">
       {isOpenSearch && (
         <Input
           autoFocus
@@ -50,11 +51,12 @@ const MarkdownComponent = ({
           }}
         />
       )}
-
-      <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm]}>
-        {content}
-      </ReactMarkdown>
-    </div>
+      <div ref={contentRef}>
+        <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm]}>
+          {content}
+        </ReactMarkdown>
+      </div>
+    </Box>
   )
 }
 
