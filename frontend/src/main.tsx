@@ -11,7 +11,7 @@ import reportWebVitals from './reportWebVitals.ts'
 import '@mantine/core/styles.css'
 
 // Create a new router instance
-const router = createRouter({
+export const appRouter = createRouter({
   routeTree,
   context: {},
   defaultPreload: 'intent',
@@ -23,7 +23,7 @@ const router = createRouter({
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
   interface Register {
-    router: typeof router
+    router: typeof appRouter
   }
 }
 
@@ -33,7 +33,7 @@ if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <RouterProvider router={appRouter} />
     </StrictMode>,
   )
 }

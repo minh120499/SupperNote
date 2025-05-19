@@ -1,5 +1,6 @@
 import { englishUnits } from '@/data/english/englishUnitListData'
-import { Grid } from '@mantine/core'
+import { appRouter } from '@/main'
+import { Box, Button, Grid } from '@mantine/core'
 import { Link } from '@tanstack/react-router'
 import { useMemo } from 'react'
 
@@ -14,6 +15,16 @@ export const EnglishHomePage = () => {
 
   return (
     <>
+      <Box>
+        <Button
+          onClick={() =>
+            appRouter.navigate({ to: '/knowledges/english/create' })
+          }
+        >
+          Create
+        </Button>
+      </Box>
+
       <Grid>
         {englishUnitsName.map((englishUnit) => (
           <Grid.Col key={englishUnit} span={4}>

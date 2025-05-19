@@ -17,12 +17,18 @@ export const App = () => {
     <MantineProvider theme={theme}>
       <Flex direction="column" h="100vh">
         <Paper pos="sticky" top={0} style={{ zIndex: 1 }}>
-          <Container w="100%">
+          <Container fluid>
             <NavBar />
           </Container>
         </Paper>
 
-        <Container flex={1} style={{ overflow: 'auto' }} pos="relative">
+        <Container
+          fluid
+          flex={1}
+          style={{ overflow: 'auto' }}
+          m={0}
+          pos="relative"
+        >
           <Outlet />
         </Container>
       </Flex>

@@ -8,7 +8,6 @@ function RouteComponent() {
   return (
     <>
       <Outlet />
-      <Navigate to={'/knowledges/english'} />
     </>
   )
 }
