@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from 'react'
+import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -14,6 +14,8 @@ import {
 import { debounce } from 'lodash'
 import { useDisclosure } from '@mantine/hooks'
 import { IconBook } from '@tabler/icons-react'
+import type { ChangeEvent } from 'react'
+
 const initialMarkdown = `# Welcome to Markdown Editor
 
 Edit this text on the left!
@@ -32,7 +34,7 @@ console.log('Hello, world!');
 > Blockquote here
 `
 
-export const EnglishCreatePage = () => {
+export const KnowledgesCreatePage = () => {
   const [markdown, setMarkdown] = useState(initialMarkdown)
   const [fileName, setFileName] = useState('')
   const [opened, { toggle }] = useDisclosure()

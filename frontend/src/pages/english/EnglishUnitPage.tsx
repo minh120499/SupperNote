@@ -1,9 +1,16 @@
+import {
+  Anchor,
+  Breadcrumbs,
+  Button,
+  Grid,
+  GridCol,
+  ScrollArea,
+} from '@mantine/core'
+import { useParams } from '@tanstack/react-router'
 import { EnglishSideBar } from '@/components/english/EnglishSideBar'
 import { Markdown } from '@/components/Markdown'
 import { englishUnits } from '@/data/english/englishUnitListData'
 import { appRouter } from '@/main'
-import { Anchor, Breadcrumbs, Grid, GridCol, ScrollArea } from '@mantine/core'
-import { useParams } from '@tanstack/react-router'
 
 export const EnglishUnitPage = () => {
   const { unit } = useParams({ strict: false })
@@ -16,13 +23,20 @@ export const EnglishUnitPage = () => {
 
   return (
     <Grid>
-      <GridCol span={12}>
+      <GridCol span={4}>
         <Breadcrumbs>
           <Anchor onClick={() => handleClick('/knowledges/english')}>
             English
           </Anchor>
-          <Anchor>{unit}</Anchor>
+          <Anchor onClick={() => handleClick(`/knowledges/english/${unit}`)}>
+            {unit}
+          </Anchor>
         </Breadcrumbs>
+      </GridCol>
+      <GridCol span={8}>
+        <Button onClick={() => handleClick(`/knowledges/english/${unit}/edit`)}>
+          Edit
+        </Button>
       </GridCol>
 
       <Grid.Col span={4}>

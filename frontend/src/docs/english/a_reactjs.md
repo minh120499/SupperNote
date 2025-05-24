@@ -9,6 +9,6 @@ Dùng PureComponent hoặc React.memo cho các component "ngon sẵn", chỉ re-
 Không tạo hàm mới trong render, dễ khiến component con bị render lại.
 
 # Key Optimization:
-Khi dùng .map(), đảm bảo key là unique và stable (ví dụ ID, đừng dùng index).
+Khi dùng .map(), đảm bảo key là unique và stable (ví dụ ID, đừng dùng index)
 
 

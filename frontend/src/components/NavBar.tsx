@@ -8,6 +8,7 @@ import {
   useMantineColorScheme,
 } from '@mantine/core'
 import { IconMoon, IconSun } from '@tabler/icons-react'
+import { Fragment } from 'react'
 import type { JSX } from 'react'
 
 interface MenuItems {
@@ -52,7 +53,7 @@ export const NavBar = () => {
           {menus.map((menu) => (
             <Tabs.Tab key={menu.key} value={menu.key}>
               {!menu.children ? (
-                menu.label
+                <Fragment key={menu.key}>{menu.label}</Fragment>
               ) : (
                 <HoverCard key={menu.key}>
                   <HoverCard.Target>
