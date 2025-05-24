@@ -2,12 +2,13 @@ import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 import Mark from 'mark.js'
-import { useRef, useEffect, useState, memo } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
+import { Box, Input } from '@mantine/core'
 import {
   KeyboardShortcut,
   useKeyboardShortcut,
 } from '@/hooks/useKeyboardShortcut'
-import { Box, Input } from '@mantine/core'
+
 interface MarkdownProps {
   content?: string
 }
@@ -20,8 +21,8 @@ const MarkdownComponent = ({
 
   const contentRef = useRef<HTMLDivElement>(null)
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [marks, setMarks] = useState<NodeListOf<HTMLElement>>()
+  // const [currentIndex, setCurrentIndex] = useState(0)
+  // const [marks, setMarks] = useState<NodeListOf<HTMLElement>>()
   const [searchWords, setSearchWords] = useState('')
 
   useEffect(() => {

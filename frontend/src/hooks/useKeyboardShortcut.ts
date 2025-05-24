@@ -11,6 +11,9 @@ export const useKeyboardShortcut = () => {
   const [usedShortKey, setUsedShortKey] = useState<{ [key: string]: boolean }>(
     {},
   )
+
+  console.log(modifierKeys)
+
   useEffect(() => {
     const handleKeyboardShortcut = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'f') {

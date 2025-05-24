@@ -7,17 +7,17 @@ import {
   Tabs,
   useMantineColorScheme,
 } from '@mantine/core'
-import type { JSX } from 'react'
 import { IconMoon, IconSun } from '@tabler/icons-react'
+import type { JSX } from 'react'
 
 interface MenuItems {
   label: JSX.Element | string
   key: string
   icon?: JSX.Element | string
-  children?: MenuItems[]
+  children?: Array<MenuItems>
 }
 
-const menus: MenuItems[] = [
+const menus: Array<MenuItems> = [
   {
     label: <Link to="/">Home</Link>,
     key: 'home',
@@ -54,7 +54,7 @@ export const NavBar = () => {
               {!menu.children ? (
                 menu.label
               ) : (
-                <HoverCard>
+                <HoverCard key={menu.key}>
                   <HoverCard.Target>
                     <Box variant="transparent">Tài liệu</Box>
                   </HoverCard.Target>

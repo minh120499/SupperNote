@@ -1,12 +1,12 @@
 import { Outlet } from '@tanstack/react-router'
-import { NavBar } from '@/components/NavBar'
 import {
   Container,
-  createTheme,
   Flex,
   MantineProvider,
   Paper,
+  createTheme,
 } from '@mantine/core'
+import { NavBar } from '@/components/NavBar'
 
 const theme = createTheme({
   /** Your theme override here */
