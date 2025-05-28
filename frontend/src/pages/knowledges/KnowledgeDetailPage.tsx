@@ -7,26 +7,31 @@ import {
   ScrollArea,
 } from '@mantine/core'
 import { useParams } from '@tanstack/react-router'
+import type { CategoryType } from '@/types/AppType'
 import { EnglishSideBar } from '@/components/english/EnglishSideBar'
 import { Markdown } from '@/components/Markdown'
 import { englishUnits } from '@/data/english/englishUnitListData'
 import { appRouter } from '@/main'
 
-export const EnglishUnitPage = () => {
+interface KnowledgeDetailPageProps {
+  category: CategoryType
+}
+
+export const KnowledgeDetailPage = ({ category }: KnowledgeDetailPageProps) => {
   const { unit } = useParams({ strict: false })
 
   const handleClick = (path: string) => {
     appRouter.navigate({ to: path })
   }
 
-  const file = `/src/docs/english/${unit}.md`
+  const file = `/src/docs/${category}/${unit}.md`
 
   return (
     <Grid>
       <GridCol span={4}>
         <Breadcrumbs>
           <Anchor onClick={() => handleClick('/knowledges/english')}>
-            English
+            {category.toUpperCase()}
           </Anchor>
           <Anchor onClick={() => handleClick(`/knowledges/english/${unit}`)}>
             {unit}

@@ -16,12 +16,17 @@ import { useDisclosure } from '@mantine/hooks'
 import { IconBook } from '@tabler/icons-react'
 import { useParams } from '@tanstack/react-router'
 import type { ChangeEvent } from 'react'
+import type { CategoryType } from '@/types/AppType'
 import { englishUnits } from '@/data/english/englishUnitListData'
 import { appRouter } from '@/main'
 
-export const EnglishEditPage = () => {
+interface KnowledgeEditPageProps {
+  category: CategoryType
+}
+
+export const KnowledgeEditPage = ({ category }: KnowledgeEditPageProps) => {
   const { unit } = useParams({ strict: false })
-  const file = `/src/docs/english/${unit}.md`
+  const file = `/src/docs/${category}/${unit}.md`
   const content = englishUnits[file]
 
   const [markdown, setMarkdown] = useState(content)

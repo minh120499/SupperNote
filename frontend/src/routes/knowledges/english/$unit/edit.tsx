@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { EnglishEditPage } from '@/pages/english/EnglishEditPage'
+import { KnowledgeEditPage } from '@/pages/knowledges/KnowledgeEditPage'
 
 export const Route = createFileRoute('/knowledges/english/$unit/edit')({
-  component: EnglishEditPage,
+  component: KnowledgeEditPage,
 })

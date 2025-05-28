@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { KnowledgesHomePage } from '@/pages/knowledges/KnowledgesHomePage'
+import { KnowledgesHomePage } from '@/pages/knowledges/KnowledgeHomePage'
 
 export const Route = createFileRoute('/knowledges/programming/')({
-  component: KnowledgesHomePage,
+  component: () => <KnowledgesHomePage category="programming" />,
 })
