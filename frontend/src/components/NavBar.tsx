@@ -38,6 +38,10 @@ const menus: Array<MenuItems> = [
     ],
   },
   {
+    label: <Link to="/travels">Travel</Link>,
+    key: 'travels',
+  },
+  {
     label: <Link to="/about_us">About us</Link>,
     key: 'aboutUs',
   },

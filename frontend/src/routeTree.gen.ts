@@ -8,27 +8,49 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as TravelsIndexImport } from './routes/travels/index'
 import { Route as KnowledgesIndexImport } from './routes/knowledges/index'
 import { Route as FinancesIndexImport } from './routes/finances/index'
 import { Route as AboutusIndexImport } from './routes/about_us/index'
+import { Route as TravelsPathlessLayoutRouteImport } from './routes/travels/_pathlessLayout/route'
 import { Route as KnowledgesProgrammingIndexImport } from './routes/knowledges/programming/index'
 import { Route as KnowledgesEnglishIndexImport } from './routes/knowledges/english/index'
 import { Route as KnowledgesProgrammingCreateImport } from './routes/knowledges/programming/create'
 import { Route as KnowledgesEnglishCreateImport } from './routes/knowledges/english/create'
+import { Route as TravelsPathlessLayoutFoodsIndexImport } from './routes/travels/_pathlessLayout/foods/index'
 import { Route as KnowledgesProgrammingUnitIndexImport } from './routes/knowledges/programming/$unit/index'
 import { Route as KnowledgesEnglishUnitIndexImport } from './routes/knowledges/english/$unit/index'
+import { Route as TravelsPathlessLayoutFoodsTestImport } from './routes/travels/_pathlessLayout/foods/test'
 import { Route as KnowledgesEnglishUnitEditImport } from './routes/knowledges/english/$unit/edit'
 
+// Create Virtual Routes
+
+const TravelsImport = createFileRoute('/travels')()
+
 // Create/Update Routes
+
+const TravelsRoute = TravelsImport.update({
+  id: '/travels',
+  path: '/travels',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const TravelsIndexRoute = TravelsIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TravelsRoute,
 } as any)
 
 const KnowledgesIndexRoute = KnowledgesIndexImport.update({
@@ -48,6 +70,13 @@ const AboutusIndexRoute = AboutusIndexImport.update({
   path: '/about_us/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const TravelsPathlessLayoutRouteRoute = TravelsPathlessLayoutRouteImport.update(
+  {
+    id: '/_pathlessLayout',
+    getParentRoute: () => TravelsRoute,
+  } as any,
+)
 
 const KnowledgesProgrammingIndexRoute = KnowledgesProgrammingIndexImport.update(
   {
@@ -76,6 +105,13 @@ const KnowledgesEnglishCreateRoute = KnowledgesEnglishCreateImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const TravelsPathlessLayoutFoodsIndexRoute =
+  TravelsPathlessLayoutFoodsIndexImport.update({
+    id: '/foods/',
+    path: '/foods/',
+    getParentRoute: () => TravelsPathlessLayoutRouteRoute,
+  } as any)
+
 const KnowledgesProgrammingUnitIndexRoute =
   KnowledgesProgrammingUnitIndexImport.update({
     id: '/knowledges/programming/$unit/',
@@ -90,6 +126,13 @@ const KnowledgesEnglishUnitIndexRoute = KnowledgesEnglishUnitIndexImport.update(
     getParentRoute: () => rootRoute,
   } as any,
 )
+
+const TravelsPathlessLayoutFoodsTestRoute =
+  TravelsPathlessLayoutFoodsTestImport.update({
+    id: '/foods/test',
+    path: '/foods/test',
+    getParentRoute: () => TravelsPathlessLayoutRouteRoute,
+  } as any)
 
 const KnowledgesEnglishUnitEditRoute = KnowledgesEnglishUnitEditImport.update({
   id: '/knowledges/english/$unit/edit',
@@ -107,6 +150,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
+    }
+    '/travels': {
+      id: '/travels'
+      path: '/travels'
+      fullPath: '/travels'
+      preLoaderRoute: typeof TravelsImport
+      parentRoute: typeof rootRoute
+    }
+    '/travels/_pathlessLayout': {
+      id: '/travels/_pathlessLayout'
+      path: '/travels'
+      fullPath: '/travels'
+      preLoaderRoute: typeof TravelsPathlessLayoutRouteImport
+      parentRoute: typeof TravelsRoute
     }
     '/about_us/': {
       id: '/about_us/'
@@ -128,6 +185,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/knowledges'
       preLoaderRoute: typeof KnowledgesIndexImport
       parentRoute: typeof rootRoute
+    }
+    '/travels/': {
+      id: '/travels/'
+      path: '/'
+      fullPath: '/travels/'
+      preLoaderRoute: typeof TravelsIndexImport
+      parentRoute: typeof TravelsImport
     }
     '/knowledges/english/create': {
       id: '/knowledges/english/create'
@@ -164,6 +228,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KnowledgesEnglishUnitEditImport
       parentRoute: typeof rootRoute
     }
+    '/travels/_pathlessLayout/foods/test': {
+      id: '/travels/_pathlessLayout/foods/test'
+      path: '/foods/test'
+      fullPath: '/travels/foods/test'
+      preLoaderRoute: typeof TravelsPathlessLayoutFoodsTestImport
+      parentRoute: typeof TravelsPathlessLayoutRouteImport
+    }
     '/knowledges/english/$unit/': {
       id: '/knowledges/english/$unit/'
       path: '/knowledges/english/$unit'
@@ -178,27 +249,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KnowledgesProgrammingUnitIndexImport
       parentRoute: typeof rootRoute
     }
+    '/travels/_pathlessLayout/foods/': {
+      id: '/travels/_pathlessLayout/foods/'
+      path: '/foods'
+      fullPath: '/travels/foods'
+      preLoaderRoute: typeof TravelsPathlessLayoutFoodsIndexImport
+      parentRoute: typeof TravelsPathlessLayoutRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface TravelsPathlessLayoutRouteRouteChildren {
+  TravelsPathlessLayoutFoodsTestRoute: typeof TravelsPathlessLayoutFoodsTestRoute
+  TravelsPathlessLayoutFoodsIndexRoute: typeof TravelsPathlessLayoutFoodsIndexRoute
+}
+
+const TravelsPathlessLayoutRouteRouteChildren: TravelsPathlessLayoutRouteRouteChildren =
+  {
+    TravelsPathlessLayoutFoodsTestRoute: TravelsPathlessLayoutFoodsTestRoute,
+    TravelsPathlessLayoutFoodsIndexRoute: TravelsPathlessLayoutFoodsIndexRoute,
+  }
+
+const TravelsPathlessLayoutRouteRouteWithChildren =
+  TravelsPathlessLayoutRouteRoute._addFileChildren(
+    TravelsPathlessLayoutRouteRouteChildren,
+  )
+
+interface TravelsRouteChildren {
+  TravelsPathlessLayoutRouteRoute: typeof TravelsPathlessLayoutRouteRouteWithChildren
+  TravelsIndexRoute: typeof TravelsIndexRoute
+}
+
+const TravelsRouteChildren: TravelsRouteChildren = {
+  TravelsPathlessLayoutRouteRoute: TravelsPathlessLayoutRouteRouteWithChildren,
+  TravelsIndexRoute: TravelsIndexRoute,
+}
+
+const TravelsRouteWithChildren =
+  TravelsRoute._addFileChildren(TravelsRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/travels': typeof TravelsPathlessLayoutRouteRouteWithChildren
   '/about_us': typeof AboutusIndexRoute
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
+  '/travels/': typeof TravelsIndexRoute
   '/knowledges/english/create': typeof KnowledgesEnglishCreateRoute
   '/knowledges/programming/create': typeof KnowledgesProgrammingCreateRoute
   '/knowledges/english': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming': typeof KnowledgesProgrammingIndexRoute
   '/knowledges/english/$unit/edit': typeof KnowledgesEnglishUnitEditRoute
+  '/travels/foods/test': typeof TravelsPathlessLayoutFoodsTestRoute
   '/knowledges/english/$unit': typeof KnowledgesEnglishUnitIndexRoute
   '/knowledges/programming/$unit': typeof KnowledgesProgrammingUnitIndexRoute
+  '/travels/foods': typeof TravelsPathlessLayoutFoodsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/travels': typeof TravelsIndexRoute
   '/about_us': typeof AboutusIndexRoute
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
@@ -207,42 +319,54 @@ export interface FileRoutesByTo {
   '/knowledges/english': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming': typeof KnowledgesProgrammingIndexRoute
   '/knowledges/english/$unit/edit': typeof KnowledgesEnglishUnitEditRoute
+  '/travels/foods/test': typeof TravelsPathlessLayoutFoodsTestRoute
   '/knowledges/english/$unit': typeof KnowledgesEnglishUnitIndexRoute
   '/knowledges/programming/$unit': typeof KnowledgesProgrammingUnitIndexRoute
+  '/travels/foods': typeof TravelsPathlessLayoutFoodsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/travels': typeof TravelsRouteWithChildren
+  '/travels/_pathlessLayout': typeof TravelsPathlessLayoutRouteRouteWithChildren
   '/about_us/': typeof AboutusIndexRoute
   '/finances/': typeof FinancesIndexRoute
   '/knowledges/': typeof KnowledgesIndexRoute
+  '/travels/': typeof TravelsIndexRoute
   '/knowledges/english/create': typeof KnowledgesEnglishCreateRoute
   '/knowledges/programming/create': typeof KnowledgesProgrammingCreateRoute
   '/knowledges/english/': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming/': typeof KnowledgesProgrammingIndexRoute
   '/knowledges/english/$unit/edit': typeof KnowledgesEnglishUnitEditRoute
+  '/travels/_pathlessLayout/foods/test': typeof TravelsPathlessLayoutFoodsTestRoute
   '/knowledges/english/$unit/': typeof KnowledgesEnglishUnitIndexRoute
   '/knowledges/programming/$unit/': typeof KnowledgesProgrammingUnitIndexRoute
+  '/travels/_pathlessLayout/foods/': typeof TravelsPathlessLayoutFoodsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/travels'
     | '/about_us'
     | '/finances'
     | '/knowledges'
+    | '/travels/'
     | '/knowledges/english/create'
     | '/knowledges/programming/create'
     | '/knowledges/english'
     | '/knowledges/programming'
     | '/knowledges/english/$unit/edit'
+    | '/travels/foods/test'
     | '/knowledges/english/$unit'
     | '/knowledges/programming/$unit'
+    | '/travels/foods'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/travels'
     | '/about_us'
     | '/finances'
     | '/knowledges'
@@ -251,26 +375,34 @@ export interface FileRouteTypes {
     | '/knowledges/english'
     | '/knowledges/programming'
     | '/knowledges/english/$unit/edit'
+    | '/travels/foods/test'
     | '/knowledges/english/$unit'
     | '/knowledges/programming/$unit'
+    | '/travels/foods'
   id:
     | '__root__'
     | '/'
+    | '/travels'
+    | '/travels/_pathlessLayout'
     | '/about_us/'
     | '/finances/'
     | '/knowledges/'
+    | '/travels/'
     | '/knowledges/english/create'
     | '/knowledges/programming/create'
     | '/knowledges/english/'
     | '/knowledges/programming/'
     | '/knowledges/english/$unit/edit'
+    | '/travels/_pathlessLayout/foods/test'
     | '/knowledges/english/$unit/'
     | '/knowledges/programming/$unit/'
+    | '/travels/_pathlessLayout/foods/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TravelsRoute: typeof TravelsRouteWithChildren
   AboutusIndexRoute: typeof AboutusIndexRoute
   FinancesIndexRoute: typeof FinancesIndexRoute
   KnowledgesIndexRoute: typeof KnowledgesIndexRoute
@@ -285,6 +417,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TravelsRoute: TravelsRouteWithChildren,
   AboutusIndexRoute: AboutusIndexRoute,
   FinancesIndexRoute: FinancesIndexRoute,
   KnowledgesIndexRoute: KnowledgesIndexRoute,
@@ -308,6 +441,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/travels",
         "/about_us/",
         "/finances/",
         "/knowledges/",
@@ -323,6 +457,21 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+    "/travels": {
+      "filePath": "travels/_pathlessLayout",
+      "children": [
+        "/travels/_pathlessLayout",
+        "/travels/"
+      ]
+    },
+    "/travels/_pathlessLayout": {
+      "filePath": "travels/_pathlessLayout/route.tsx",
+      "parent": "/travels",
+      "children": [
+        "/travels/_pathlessLayout/foods/test",
+        "/travels/_pathlessLayout/foods/"
+      ]
+    },
     "/about_us/": {
       "filePath": "about_us/index.tsx"
     },
@@ -331,6 +480,10 @@ export const routeTree = rootRoute
     },
     "/knowledges/": {
       "filePath": "knowledges/index.tsx"
+    },
+    "/travels/": {
+      "filePath": "travels/index.tsx",
+      "parent": "/travels"
     },
     "/knowledges/english/create": {
       "filePath": "knowledges/english/create.tsx"
@@ -347,11 +500,19 @@ export const routeTree = rootRoute
     "/knowledges/english/$unit/edit": {
       "filePath": "knowledges/english/$unit/edit.tsx"
     },
+    "/travels/_pathlessLayout/foods/test": {
+      "filePath": "travels/_pathlessLayout/foods/test.tsx",
+      "parent": "/travels/_pathlessLayout"
+    },
     "/knowledges/english/$unit/": {
       "filePath": "knowledges/english/$unit/index.tsx"
     },
     "/knowledges/programming/$unit/": {
       "filePath": "knowledges/programming/$unit/index.tsx"
+    },
+    "/travels/_pathlessLayout/foods/": {
+      "filePath": "travels/_pathlessLayout/foods/index.tsx",
+      "parent": "/travels/_pathlessLayout"
     }
   }
 }
