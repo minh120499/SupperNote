@@ -1,9 +1,9 @@
 import { Box, Button, Grid } from '@mantine/core'
-import { Link } from '@tanstack/react-router'
 import type { CategoryType } from '@/types/AppType'
 import { appRouter } from '@/main'
 import { englishUnits } from '@/data/english/englishUnitListData'
 import { programmingUnits } from '@/data/programming/programmingUnitsListData'
+import { LinkComponent } from '@/components/ui/LinkComponent'
 
 interface KnowledgeHomePageProps {
   category: CategoryType
@@ -41,12 +41,12 @@ export const KnowledgesHomePage = ({ category }: KnowledgeHomePageProps) => {
       <Grid>
         {getKnowledgeCategory(category).map((knowledgeCategory) => (
           <Grid.Col key={knowledgeCategory} span={4}>
-            <Link
+            <LinkComponent
               to="/knowledges/english/$unit"
               params={{ unit: knowledgeCategory.replace('.md', '') }}
             >
               {knowledgeCategory.replaceAll('_', ' ')}
-            </Link>
+            </LinkComponent>
           </Grid.Col>
         ))}
       </Grid>

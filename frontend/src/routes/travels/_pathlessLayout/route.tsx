@@ -1,4 +1,6 @@
-import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
+import { LinkComponent } from '@/components/ui/LinkComponent'
+import { Anchor, Breadcrumbs } from '@mantine/core'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/travels/_pathlessLayout')({
   component: RouteComponent,
@@ -7,8 +9,11 @@ export const Route = createFileRoute('/travels/_pathlessLayout')({
 function RouteComponent() {
   return (
     <div>
-      <h1>_pathlessLayout</h1>
-      <Link to="/travels/foods">Go to Foods</Link>
+      <Breadcrumbs>
+        <Anchor>
+          <LinkComponent to="/travels">Travels</LinkComponent>
+        </Anchor>
+      </Breadcrumbs>
       <Outlet />
     </div>
   )

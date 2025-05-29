@@ -1,4 +1,5 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { LinkComponent } from '@/components/ui/LinkComponent'
+import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/travels/')({
   component: RouteComponent,
@@ -6,8 +7,9 @@ export const Route = createFileRoute('/travels/')({
 
 function RouteComponent() {
   return (
-    <div>
-      <Link to="/travels/foods">Go to Foods</Link>
-    </div>
+    <>
+      <LinkComponent to="/travels/foods">Food</LinkComponent>
+      <LinkComponent to="/travels/coffees">Coffee</LinkComponent>
+    </>
   )
 }

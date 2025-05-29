@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/travels/_pathlessLayout/foods/test')({
-  component: TestPage,
+  component: RouteComponent,
 })
 
-function TestPage() {
-  return <div>🍜 This is the Test Page</div>
+function RouteComponent() {
+  return <div>Hello "/travels/_pathlessLayout/foods/test"!</div>
 }

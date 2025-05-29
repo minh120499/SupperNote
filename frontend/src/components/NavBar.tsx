@@ -1,15 +1,17 @@
-import { Link } from '@tanstack/react-router'
 import {
   ActionIcon,
+  Anchor,
   Box,
   Flex,
   HoverCard,
+  NavLink,
   Tabs,
   useMantineColorScheme,
 } from '@mantine/core'
 import { IconMoon, IconSun } from '@tabler/icons-react'
 import { Fragment } from 'react'
 import type { JSX } from 'react'
+import { LinkComponent } from './ui/LinkComponent'
 
 interface MenuItems {
   label: JSX.Element | string
@@ -20,29 +22,33 @@ interface MenuItems {
 
 const menus: Array<MenuItems> = [
   {
-    label: <Link to="/">Home</Link>,
+    label: <LinkComponent to="/">Home</LinkComponent>,
     key: 'home',
   },
   {
-    label: <Link to="/knowledges">Knowledge</Link>,
+    label: <LinkComponent to="/knowledges">Knowledge</LinkComponent>,
     key: 'knowledge',
     children: [
       {
-        label: <Link to="/knowledges/english">English</Link>,
+        label: <LinkComponent to="/knowledges/english">English</LinkComponent>,
         key: 'english',
       },
       {
-        label: <Link to="/knowledges/programming">Programming</Link>,
+        label: (
+          <LinkComponent to="/knowledges/programming">
+            Programming
+          </LinkComponent>
+        ),
         key: 'programming',
       },
     ],
   },
   {
-    label: <Link to="/travels">Travel</Link>,
+    label: <LinkComponent to="/travels">Travel</LinkComponent>,
     key: 'travels',
   },
   {
-    label: <Link to="/about_us">About us</Link>,
+    label: <LinkComponent to="/about_us">About us</LinkComponent>,
     key: 'aboutUs',
   },
 ]
@@ -61,7 +67,7 @@ export const NavBar = () => {
               ) : (
                 <HoverCard key={menu.key}>
                   <HoverCard.Target>
-                    <Box variant="transparent">Tài liệu</Box>
+                    <Anchor>Doc</Anchor>
                   </HoverCard.Target>
                   <HoverCard.Dropdown>
                     <Flex direction="column" gap="sm">
