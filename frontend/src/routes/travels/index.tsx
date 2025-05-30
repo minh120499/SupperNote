@@ -1,5 +1,6 @@
-import { LinkComponent } from '@/components/ui/LinkComponent'
 import { createFileRoute } from '@tanstack/react-router'
+import { Box } from '@mantine/core'
+import { LinkComponent } from '@/components/ui/LinkComponent'
 
 export const Route = createFileRoute('/travels/')({
   component: RouteComponent,
@@ -8,8 +9,12 @@ export const Route = createFileRoute('/travels/')({
 function RouteComponent() {
   return (
     <>
-      <LinkComponent to="/travels/foods">Food</LinkComponent>
-      <LinkComponent to="/travels/coffees">Coffee</LinkComponent>
+      <Box>
+        <LinkComponent to="/travels/foods">Foods</LinkComponent>
+      </Box>
+      <Box>
+        <LinkComponent to="/travels/coffees">Coffee</LinkComponent>
+      </Box>
     </>
   )
 }

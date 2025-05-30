@@ -1,20 +1,28 @@
+import { Anchor, Box, Breadcrumbs, Button } from '@mantine/core'
+import { Outlet, createFileRoute, useLocation } from '@tanstack/react-router'
 import { LinkComponent } from '@/components/ui/LinkComponent'
-import { Anchor, Breadcrumbs } from '@mantine/core'
-import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/travels/_pathlessLayout')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const { pathname } = useLocation()
+
   return (
-    <div>
+    <>
       <Breadcrumbs>
-        <Anchor>
-          <LinkComponent to="/travels">Travels</LinkComponent>
-        </Anchor>
+        <LinkComponent to="/travels">Travels</LinkComponent>
+        {getAnchorPath(pathname)}
       </Breadcrumbs>
       <Outlet />
-    </div>
+    </>
   )
+}
+
+const getAnchorPath = (pathName: string) => {
+  switch (pathName) {
+    case '/travels/foods':
+      return <Anchor>Foods</Anchor>
+  }
 }
