@@ -48,6 +48,10 @@ const menus: Array<MenuItems> = [
     key: 'travels',
   },
   {
+    label: <LinkComponent to="/notes">Note</LinkComponent>,
+    key: 'notes',
+  },
+  {
     label: <LinkComponent to="/about_us">About us</LinkComponent>,
     key: 'aboutUs',
   },
@@ -67,7 +71,7 @@ export const NavBar = () => {
               ) : (
                 <HoverCard key={menu.key}>
                   <HoverCard.Target>
-                    <Anchor>Doc</Anchor>
+                    <Anchor>Knowledges</Anchor>
                   </HoverCard.Target>
                   <HoverCard.Dropdown>
                     <Flex direction="column" gap="sm">
