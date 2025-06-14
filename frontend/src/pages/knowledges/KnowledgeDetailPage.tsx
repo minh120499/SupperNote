@@ -49,7 +49,7 @@ export const KnowledgeDetailPage = ({ category }: KnowledgeDetailPageProps) => {
       </Grid.Col>
       <Grid.Col span={8}>
         <ScrollArea>
-          <Markdown content={englishUnits[file]} />
+          <Markdown content={englishUnits[file]} onChange={() => {}} />
         </ScrollArea>
       </Grid.Col>
     </Grid>

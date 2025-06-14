@@ -1,20 +1,8 @@
 import { useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
-import {
-  ActionIcon,
-  Button,
-  Grid,
-  GridCol,
-  Input,
-  ScrollArea,
-  Textarea,
-} from '@mantine/core'
+import { Button, Grid, GridCol, Input } from '@mantine/core'
 import { debounce } from 'lodash'
-import { useDisclosure } from '@mantine/hooks'
-import { IconBook } from '@tabler/icons-react'
 import type { ChangeEvent } from 'react'
+import { Markdown } from '@/components/Markdown'
 
 const initialMarkdown = `# Welcome to Markdown Editor
 
@@ -37,7 +25,6 @@ console.log('Hello, world!');
 export const KnowledgesCreatePage = () => {
   const [markdown, setMarkdown] = useState(initialMarkdown)
   const [fileName, setFileName] = useState('')
-  const [opened, { toggle }] = useDisclosure()
 
   const handleDownload = () => {
     const blob = new Blob([markdown], { type: 'text/markdown' })
@@ -84,36 +71,7 @@ export const KnowledgesCreatePage = () => {
         <Button onClick={handleDownload}>Create</Button>
       </GridCol>
 
-      <GridCol span={opened ? 6 : 12} pos="relative">
-        <ActionIcon
-          variant="subtle"
-          onClick={toggle}
-          pos="absolute"
-          style={{ zIndex: 9, right: 0, margin: '4px 8px' }}
-        >
-          <IconBook />
-        </ActionIcon>
-        <Textarea
-          autosize
-          onChange={handleChangeMarkdown}
-          minRows={30}
-          maxRows={30}
-          name="markdown"
-        />
-      </GridCol>
-
-      {opened && (
-        <GridCol span={6}>
-          <ScrollArea h={650}>
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-            >
-              {markdown}
-            </ReactMarkdown>
-          </ScrollArea>
-        </GridCol>
-      )}
+      <Markdown onChange={handleChangeMarkdown} content={markdown} />
     </Grid>
   )
 }
