@@ -1,4 +1,4 @@
-import { Anchor, Box, Breadcrumbs, Button } from '@mantine/core'
+import { Anchor, Breadcrumbs } from '@mantine/core'
 import { Outlet, createFileRoute, useLocation } from '@tanstack/react-router'
 import { LinkComponent } from '@/components/ui/LinkComponent'
 
