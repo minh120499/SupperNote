@@ -1,4 +1,4 @@
-import { Anchor, Box, Breadcrumbs, Button } from '@mantine/core'
+import { Anchor, Breadcrumbs } from '@mantine/core'
 import { Outlet, createFileRoute, useLocation } from '@tanstack/react-router'
 import { LinkComponent } from '@/components/ui/LinkComponent'
 
@@ -21,8 +21,11 @@ function RouteComponent() {
 }
 
 const getAnchorPath = (pathName: string) => {
-  switch (pathName) {
-    case '/notes/books':
-      return <Anchor>Books</Anchor>
+  if (pathName.startsWith('/notes/books')) {
+    const bookId = Number(pathName.split('/notes/books/').pop())
+    return [
+      <LinkComponent to="/notes/books">Books</LinkComponent>,
+      Number.isInteger(bookId) && <Anchor key={2}>{bookId}</Anchor>,
+    ]
   }
 }

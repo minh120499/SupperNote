@@ -3,6 +3,7 @@ import { Button, Grid, GridCol, Input } from '@mantine/core'
 import { debounce } from 'lodash'
 import type { ChangeEvent } from 'react'
 import { Markdown } from '@/components/Markdown'
+import { handleSaveFile } from '@/utils/files'
 
 const initialMarkdown = `# Welcome to Markdown Editor
 
@@ -27,17 +28,7 @@ export const KnowledgesCreatePage = () => {
   const [fileName, setFileName] = useState('')
 
   const handleDownload = () => {
-    const blob = new Blob([markdown], { type: 'text/markdown' })
-    const url = URL.createObjectURL(blob)
-
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${fileName}.md`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-
-    URL.revokeObjectURL(url)
+    handleSaveFile(markdown, `${fileName}.md`, 'text/markdown')
   }
 
   const handleChangeMarkdown = debounce(

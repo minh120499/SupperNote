@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Button, Flex, Text } from '@mantine/core'
+import { ActionIcon, Box, Flex, NavLink, Text } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { fetchNoteBooks } from '@/api/noteBookApi'
 import { IconPlus } from '@tabler/icons-react'
@@ -33,24 +33,38 @@ export const NoteBookListPage = () => {
       {isLoading && <Box>Loading...</Box>}
       {!error &&
         books?.map((book) => (
-          <Box key={book.id} mb="md">
-            <Box>
-              <Text>{book.name}</Text>
-            </Box>
-            <Box>{book.description}</Box>
-            {book.link && (
-              <Box>
-                <a href={book.link} target="_blank" rel="noopener noreferrer">
-                  Link
-                </a>
+          <NavLink
+            key={book.id}
+            onClick={(e) => {
+              e.preventDefault()
+              appRouter.navigate({ to: '/notes/books/' + book.id })
+            }}
+            href={'/notes/books/' + book.id}
+            label={
+              <Box mb="md">
+                <Box>
+                  <Text>{book.name}</Text>
+                </Box>
+                <Box>{book.description}</Box>
+                {book.link && (
+                  <Box>
+                    <a
+                      href={book.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Link
+                    </a>
+                  </Box>
+                )}
+                {book.image && (
+                  <Box>
+                    <img src={book.image} alt={book.name} />
+                  </Box>
+                )}
               </Box>
-            )}
-            {book.image && (
-              <Box>
-                <img src={book.image} alt={book.name} />
-              </Box>
-            )}
-          </Box>
+            }
+          />
         ))}
     </Box>
   )
