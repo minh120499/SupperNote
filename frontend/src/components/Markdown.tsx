@@ -3,14 +3,7 @@ import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 import Mark from 'mark.js'
 import { memo, useEffect, useRef, useState } from 'react'
-import {
-  ActionIcon,
-  Box,
-  GridCol,
-  Input,
-  ScrollArea,
-  Textarea,
-} from '@mantine/core'
+import { ActionIcon, Box, Input, ScrollArea, Textarea } from '@mantine/core'
 import {
   KeyboardShortcut,
   useKeyboardShortcut,

@@ -1,24 +1,57 @@
-import { Box, Text } from '@mantine/core'
+import { ActionIcon, Box, Button, Flex, Text } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { fetchNoteBooks } from '@/api/noteBookApi'
+import { IconPlus } from '@tabler/icons-react'
+import { appRouter } from '@/main'
 
 export const NoteBookListPage = () => {
-  const { isPending, error, data, isFetching } = useQuery({
-    queryKey: ['repoData'],
+  const {
+    isLoading,
+    error,
+    data: books,
+  } = useQuery({
+    queryKey: [],
     queryFn: fetchNoteBooks,
+    refetchOnWindowFocus: false,
   })
 
-  console.log(isPending, error, data, isFetching)
+  const handleAddBook = () => {
+    appRouter.navigate({
+      to: '/notes/books/create',
+    })
+  }
 
   return (
     <Box>
-      <Box>
+      <Flex align={'center'} mb="md" gap={'xs'}>
         <Text variant="gradient">Sách nên đọc</Text>
-      </Box>
-      <Box>
-        Chó sủa nhầm cây - Tại sao những gì ta biết về thành công có khi lại sai
-        - BARKING UP THE WRONG TREE
-      </Box>
+        <ActionIcon variant="subtle" size={'sm'} onClick={handleAddBook}>
+          <IconPlus stroke={2} />
+        </ActionIcon>
+      </Flex>
+
+      {isLoading && <Box>Loading...</Box>}
+      {!error &&
+        books?.map((book) => (
+          <Box key={book.id} mb="md">
+            <Box>
+              <Text>{book.name}</Text>
+            </Box>
+            <Box>{book.description}</Box>
+            {book.link && (
+              <Box>
+                <a href={book.link} target="_blank" rel="noopener noreferrer">
+                  Link
+                </a>
+              </Box>
+            )}
+            {book.image && (
+              <Box>
+                <img src={book.image} alt={book.name} />
+              </Box>
+            )}
+          </Box>
+        ))}
     </Box>
   )
 }

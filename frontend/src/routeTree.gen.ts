@@ -31,6 +31,7 @@ import { Route as NotesPathlessLayoutBooksIndexImport } from './routes/notes/_pa
 import { Route as KnowledgesProgrammingUnitIndexImport } from './routes/knowledges/programming/$unit/index'
 import { Route as KnowledgesEnglishUnitIndexImport } from './routes/knowledges/english/$unit/index'
 import { Route as TravelsPathlessLayoutFoodsTestImport } from './routes/travels/_pathlessLayout/foods/test'
+import { Route as NotesPathlessLayoutBooksCreateImport } from './routes/notes/_pathlessLayout/books/create'
 import { Route as KnowledgesEnglishUnitEditImport } from './routes/knowledges/english/$unit/edit'
 
 // Create Virtual Routes
@@ -170,6 +171,13 @@ const TravelsPathlessLayoutFoodsTestRoute =
     getParentRoute: () => TravelsPathlessLayoutRouteRoute,
   } as any)
 
+const NotesPathlessLayoutBooksCreateRoute =
+  NotesPathlessLayoutBooksCreateImport.update({
+    id: '/books/create',
+    path: '/books/create',
+    getParentRoute: () => NotesPathlessLayoutRouteRoute,
+  } as any)
+
 const KnowledgesEnglishUnitEditRoute = KnowledgesEnglishUnitEditImport.update({
   id: '/knowledges/english/$unit/edit',
   path: '/knowledges/english/$unit/edit',
@@ -285,6 +293,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KnowledgesEnglishUnitEditImport
       parentRoute: typeof rootRoute
     }
+    '/notes/_pathlessLayout/books/create': {
+      id: '/notes/_pathlessLayout/books/create'
+      path: '/books/create'
+      fullPath: '/notes/books/create'
+      preLoaderRoute: typeof NotesPathlessLayoutBooksCreateImport
+      parentRoute: typeof NotesPathlessLayoutRouteImport
+    }
     '/travels/_pathlessLayout/foods/test': {
       id: '/travels/_pathlessLayout/foods/test'
       path: '/foods/test'
@@ -333,11 +348,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface NotesPathlessLayoutRouteRouteChildren {
+  NotesPathlessLayoutBooksCreateRoute: typeof NotesPathlessLayoutBooksCreateRoute
   NotesPathlessLayoutBooksIndexRoute: typeof NotesPathlessLayoutBooksIndexRoute
 }
 
 const NotesPathlessLayoutRouteRouteChildren: NotesPathlessLayoutRouteRouteChildren =
   {
+    NotesPathlessLayoutBooksCreateRoute: NotesPathlessLayoutBooksCreateRoute,
     NotesPathlessLayoutBooksIndexRoute: NotesPathlessLayoutBooksIndexRoute,
   }
 
@@ -404,6 +421,7 @@ export interface FileRoutesByFullPath {
   '/knowledges/english': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming': typeof KnowledgesProgrammingIndexRoute
   '/knowledges/english/$unit/edit': typeof KnowledgesEnglishUnitEditRoute
+  '/notes/books/create': typeof NotesPathlessLayoutBooksCreateRoute
   '/travels/foods/test': typeof TravelsPathlessLayoutFoodsTestRoute
   '/knowledges/english/$unit': typeof KnowledgesEnglishUnitIndexRoute
   '/knowledges/programming/$unit': typeof KnowledgesProgrammingUnitIndexRoute
@@ -424,6 +442,7 @@ export interface FileRoutesByTo {
   '/knowledges/english': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming': typeof KnowledgesProgrammingIndexRoute
   '/knowledges/english/$unit/edit': typeof KnowledgesEnglishUnitEditRoute
+  '/notes/books/create': typeof NotesPathlessLayoutBooksCreateRoute
   '/travels/foods/test': typeof TravelsPathlessLayoutFoodsTestRoute
   '/knowledges/english/$unit': typeof KnowledgesEnglishUnitIndexRoute
   '/knowledges/programming/$unit': typeof KnowledgesProgrammingUnitIndexRoute
@@ -449,6 +468,7 @@ export interface FileRoutesById {
   '/knowledges/english/': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming/': typeof KnowledgesProgrammingIndexRoute
   '/knowledges/english/$unit/edit': typeof KnowledgesEnglishUnitEditRoute
+  '/notes/_pathlessLayout/books/create': typeof NotesPathlessLayoutBooksCreateRoute
   '/travels/_pathlessLayout/foods/test': typeof TravelsPathlessLayoutFoodsTestRoute
   '/knowledges/english/$unit/': typeof KnowledgesEnglishUnitIndexRoute
   '/knowledges/programming/$unit/': typeof KnowledgesProgrammingUnitIndexRoute
@@ -473,6 +493,7 @@ export interface FileRouteTypes {
     | '/knowledges/english'
     | '/knowledges/programming'
     | '/knowledges/english/$unit/edit'
+    | '/notes/books/create'
     | '/travels/foods/test'
     | '/knowledges/english/$unit'
     | '/knowledges/programming/$unit'
@@ -492,6 +513,7 @@ export interface FileRouteTypes {
     | '/knowledges/english'
     | '/knowledges/programming'
     | '/knowledges/english/$unit/edit'
+    | '/notes/books/create'
     | '/travels/foods/test'
     | '/knowledges/english/$unit'
     | '/knowledges/programming/$unit'
@@ -515,6 +537,7 @@ export interface FileRouteTypes {
     | '/knowledges/english/'
     | '/knowledges/programming/'
     | '/knowledges/english/$unit/edit'
+    | '/notes/_pathlessLayout/books/create'
     | '/travels/_pathlessLayout/foods/test'
     | '/knowledges/english/$unit/'
     | '/knowledges/programming/$unit/'
@@ -595,6 +618,7 @@ export const routeTree = rootRoute
       "filePath": "notes/_pathlessLayout/route.tsx",
       "parent": "/notes",
       "children": [
+        "/notes/_pathlessLayout/books/create",
         "/notes/_pathlessLayout/books/"
       ]
     },
@@ -645,6 +669,10 @@ export const routeTree = rootRoute
     },
     "/knowledges/english/$unit/edit": {
       "filePath": "knowledges/english/$unit/edit.tsx"
+    },
+    "/notes/_pathlessLayout/books/create": {
+      "filePath": "notes/_pathlessLayout/books/create.tsx",
+      "parent": "/notes/_pathlessLayout"
     },
     "/travels/_pathlessLayout/foods/test": {
       "filePath": "travels/_pathlessLayout/foods/test.tsx",
