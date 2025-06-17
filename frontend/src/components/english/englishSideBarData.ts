@@ -1,10 +1,10 @@
 interface EnglishData {
   title: string
   path: string
-  tableOfContents?: any[]
+  tableOfContents?: Array<any>
 }
 
-export const englishData: EnglishData[] = [
+export const englishData: Array<EnglishData> = [
   {
     title: 'UNIT 1: Cấu trúc trong tiếng Anh',
     path: 'Unit1_Sentence_Structures_In_English',

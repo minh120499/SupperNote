@@ -1,17 +1,15 @@
 import {
   ActionIcon,
   Anchor,
-  Box,
   Flex,
   HoverCard,
-  NavLink,
   Tabs,
   useMantineColorScheme,
 } from '@mantine/core'
 import { IconMoon, IconSun } from '@tabler/icons-react'
 import { Fragment } from 'react'
-import type { JSX } from 'react'
 import { LinkComponent } from './ui/LinkComponent'
+import type { JSX } from 'react'
 
 interface MenuItems {
   label: JSX.Element | string

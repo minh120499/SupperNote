@@ -1,7 +1,7 @@
 import { ActionIcon, Box, Flex, NavLink, Text } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
-import { fetchNoteBooks } from '@/api/noteBookApi'
 import { IconPlus } from '@tabler/icons-react'
+import { fetchNoteBooks } from '@/api/noteBookApi'
 import { appRouter } from '@/main'
 
 export const NoteBookListPage = () => {

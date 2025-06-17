@@ -4,12 +4,12 @@ import remarkGfm from 'remark-gfm'
 import Mark from 'mark.js'
 import { memo, useEffect, useRef, useState } from 'react'
 import { ActionIcon, Box, Input, ScrollArea, Textarea } from '@mantine/core'
+import { IconBook } from '@tabler/icons-react'
+import { useDisclosure } from '@mantine/hooks'
 import {
   KeyboardShortcut,
   useKeyboardShortcut,
 } from '@/hooks/useKeyboardShortcut'
-import { IconBook } from '@tabler/icons-react'
-import { useDisclosure } from '@mantine/hooks'
 
 interface MarkdownProps {
   content?: string

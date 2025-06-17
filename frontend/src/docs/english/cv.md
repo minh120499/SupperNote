@@ -14,5 +14,3 @@ Kỹ sư phần mềm với hơn 4 năm kinh nghiệm trong lĩnh vực phát tr
 # Kinh nghiệm làm việc
 
 Web developer
-
-

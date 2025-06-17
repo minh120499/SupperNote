@@ -1,5 +1,5 @@
-import { LinkComponent } from '@/components/ui/LinkComponent'
 import { Outlet } from '@tanstack/react-router'
+import { LinkComponent } from '@/components/ui/LinkComponent'
 
 export const TravelHomePage = () => {
   return (

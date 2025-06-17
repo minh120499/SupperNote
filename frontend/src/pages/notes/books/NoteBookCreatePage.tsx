@@ -1,11 +1,11 @@
-import { fetchNoteBooks } from '@/api/noteBookApi'
-import { appRouter } from '@/main'
-import type { NoteBook } from '@/types/NoteBook'
-import { handleSaveFile } from '@/utils/files'
 import { Box, Button, Grid, Group, TextInput, Title } from '@mantine/core'
 import { useForm } from '@tanstack/react-form'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from '@tanstack/react-router'
+import type { NoteBook } from '@/types/NoteBook'
+import { handleSaveFile } from '@/utils/files'
+import { appRouter } from '@/main'
+import { fetchNoteBooks } from '@/api/noteBookApi'
 
 export const NoteBookCreatePage = () => {
   const { id } = useParams({ strict: false })
@@ -20,7 +20,7 @@ export const NoteBookCreatePage = () => {
 
   const form = useForm({
     defaultValues: { ...currentBook } as NoteBook,
-    onSubmit: async ({ value }) => {
+    onSubmit: ({ value }) => {
       handleSubmit(value)
     },
   })
