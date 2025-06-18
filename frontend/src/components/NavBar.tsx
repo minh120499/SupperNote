@@ -73,7 +73,9 @@ export const NavBar = () => {
                   </HoverCard.Target>
                   <HoverCard.Dropdown>
                     <Flex direction="column" gap="sm">
-                      {menu.children.map((child) => child.label)}
+                      {menu.children.map((child) => (
+                        <Fragment key={child.key}>{child.label}</Fragment>
+                      ))}
                     </Flex>
                   </HoverCard.Dropdown>
                 </HoverCard>

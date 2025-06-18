@@ -24,6 +24,7 @@ import { Route as NotesPathlessLayoutRouteImport } from './routes/notes/_pathles
 import { Route as KnowledgesProgrammingIndexImport } from './routes/knowledges/programming/index'
 import { Route as KnowledgesEnglishIndexImport } from './routes/knowledges/english/index'
 import { Route as KnowledgesProgrammingCreateImport } from './routes/knowledges/programming/create'
+import { Route as KnowledgesEnglishVocabulariesImport } from './routes/knowledges/english/vocabularies'
 import { Route as KnowledgesEnglishCreateImport } from './routes/knowledges/english/create'
 import { Route as TravelsPathlessLayoutFoodsIndexImport } from './routes/travels/_pathlessLayout/foods/index'
 import { Route as TravelsPathlessLayoutCoffeesIndexImport } from './routes/travels/_pathlessLayout/coffees/index'
@@ -120,6 +121,13 @@ const KnowledgesProgrammingCreateRoute =
   KnowledgesProgrammingCreateImport.update({
     id: '/knowledges/programming/create',
     path: '/knowledges/programming/create',
+    getParentRoute: () => rootRoute,
+  } as any)
+
+const KnowledgesEnglishVocabulariesRoute =
+  KnowledgesEnglishVocabulariesImport.update({
+    id: '/knowledges/english/vocabularies',
+    path: '/knowledges/english/vocabularies',
     getParentRoute: () => rootRoute,
   } as any)
 
@@ -272,6 +280,13 @@ declare module '@tanstack/react-router' {
       path: '/knowledges/english/create'
       fullPath: '/knowledges/english/create'
       preLoaderRoute: typeof KnowledgesEnglishCreateImport
+      parentRoute: typeof rootRoute
+    }
+    '/knowledges/english/vocabularies': {
+      id: '/knowledges/english/vocabularies'
+      path: '/knowledges/english/vocabularies'
+      fullPath: '/knowledges/english/vocabularies'
+      preLoaderRoute: typeof KnowledgesEnglishVocabulariesImport
       parentRoute: typeof rootRoute
     }
     '/knowledges/programming/create': {
@@ -435,6 +450,7 @@ export interface FileRoutesByFullPath {
   '/notes/': typeof NotesIndexRoute
   '/travels/': typeof TravelsIndexRoute
   '/knowledges/english/create': typeof KnowledgesEnglishCreateRoute
+  '/knowledges/english/vocabularies': typeof KnowledgesEnglishVocabulariesRoute
   '/knowledges/programming/create': typeof KnowledgesProgrammingCreateRoute
   '/knowledges/english': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming': typeof KnowledgesProgrammingIndexRoute
@@ -457,6 +473,7 @@ export interface FileRoutesByTo {
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
   '/knowledges/english/create': typeof KnowledgesEnglishCreateRoute
+  '/knowledges/english/vocabularies': typeof KnowledgesEnglishVocabulariesRoute
   '/knowledges/programming/create': typeof KnowledgesProgrammingCreateRoute
   '/knowledges/english': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming': typeof KnowledgesProgrammingIndexRoute
@@ -484,6 +501,7 @@ export interface FileRoutesById {
   '/notes/': typeof NotesIndexRoute
   '/travels/': typeof TravelsIndexRoute
   '/knowledges/english/create': typeof KnowledgesEnglishCreateRoute
+  '/knowledges/english/vocabularies': typeof KnowledgesEnglishVocabulariesRoute
   '/knowledges/programming/create': typeof KnowledgesProgrammingCreateRoute
   '/knowledges/english/': typeof KnowledgesEnglishIndexRoute
   '/knowledges/programming/': typeof KnowledgesProgrammingIndexRoute
@@ -510,6 +528,7 @@ export interface FileRouteTypes {
     | '/notes/'
     | '/travels/'
     | '/knowledges/english/create'
+    | '/knowledges/english/vocabularies'
     | '/knowledges/programming/create'
     | '/knowledges/english'
     | '/knowledges/programming'
@@ -531,6 +550,7 @@ export interface FileRouteTypes {
     | '/finances'
     | '/knowledges'
     | '/knowledges/english/create'
+    | '/knowledges/english/vocabularies'
     | '/knowledges/programming/create'
     | '/knowledges/english'
     | '/knowledges/programming'
@@ -556,6 +576,7 @@ export interface FileRouteTypes {
     | '/notes/'
     | '/travels/'
     | '/knowledges/english/create'
+    | '/knowledges/english/vocabularies'
     | '/knowledges/programming/create'
     | '/knowledges/english/'
     | '/knowledges/programming/'
@@ -579,6 +600,7 @@ export interface RootRouteChildren {
   FinancesIndexRoute: typeof FinancesIndexRoute
   KnowledgesIndexRoute: typeof KnowledgesIndexRoute
   KnowledgesEnglishCreateRoute: typeof KnowledgesEnglishCreateRoute
+  KnowledgesEnglishVocabulariesRoute: typeof KnowledgesEnglishVocabulariesRoute
   KnowledgesProgrammingCreateRoute: typeof KnowledgesProgrammingCreateRoute
   KnowledgesEnglishIndexRoute: typeof KnowledgesEnglishIndexRoute
   KnowledgesProgrammingIndexRoute: typeof KnowledgesProgrammingIndexRoute
@@ -595,6 +617,7 @@ const rootRouteChildren: RootRouteChildren = {
   FinancesIndexRoute: FinancesIndexRoute,
   KnowledgesIndexRoute: KnowledgesIndexRoute,
   KnowledgesEnglishCreateRoute: KnowledgesEnglishCreateRoute,
+  KnowledgesEnglishVocabulariesRoute: KnowledgesEnglishVocabulariesRoute,
   KnowledgesProgrammingCreateRoute: KnowledgesProgrammingCreateRoute,
   KnowledgesEnglishIndexRoute: KnowledgesEnglishIndexRoute,
   KnowledgesProgrammingIndexRoute: KnowledgesProgrammingIndexRoute,
@@ -620,6 +643,7 @@ export const routeTree = rootRoute
         "/finances/",
         "/knowledges/",
         "/knowledges/english/create",
+        "/knowledges/english/vocabularies",
         "/knowledges/programming/create",
         "/knowledges/english/",
         "/knowledges/programming/",
@@ -682,6 +706,9 @@ export const routeTree = rootRoute
     },
     "/knowledges/english/create": {
       "filePath": "knowledges/english/create.tsx"
+    },
+    "/knowledges/english/vocabularies": {
+      "filePath": "knowledges/english/vocabularies.tsx"
     },
     "/knowledges/programming/create": {
       "filePath": "knowledges/programming/create.tsx"
