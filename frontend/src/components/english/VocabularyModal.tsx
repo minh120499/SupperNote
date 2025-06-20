@@ -1,108 +1,131 @@
-import {
-  Button,
-  ButtonGroup,
-  Grid,
-  Group,
-  TextInput,
-  Textarea,
-} from '@mantine/core'
+import { Button, Card, Flex, Grid, TextInput, Textarea } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { useForm } from '@tanstack/react-form'
-import { IconPlus } from '@tabler/icons-react'
+import { IconPlus, IconTrash } from '@tabler/icons-react'
 import type { EnglishVocabularie } from '@/types/KnowledgeEnglish'
+
+const initWord = {} as EnglishVocabularie
 
 export const VocabularyModal = () => {
   const form = useForm({
-    defaultValues: [{}] as Array<EnglishVocabularie>,
+    defaultValues: {
+      words: [initWord],
+    },
     onSubmit: ({ value }) => {
-      handleSubmit(value)
+      handleSubmitWords(value)
     },
   })
 
-  const { Field, state, insertFieldValue } = form
+  const { Field, handleSubmit } = form
 
-  const handleSubmit = (value: Array<EnglishVocabularie>) => {}
+  const handleSubmitWords = (value: { words: Array<EnglishVocabularie> }) => {
+    console.log(value)
+    modals.closeAll()
+  }
 
   return (
     <>
-      {state.values.map((_, index) => {
-        return (
-          <Grid key={index}>
-            <Grid.Col span={6}>
-              <Field
-                name={`[${index}].word`}
-                children={(field) => (
-                  <TextInput
-                    label="Word"
-                    placeholder="Enter word"
-                    data-autofocus
-                    withAsterisk
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                )}
-              />
-            </Grid.Col>
+      <Field name="words" mode="array">
+        {({ state, pushValue, removeValue }) => (
+          <>
+            <Flex direction="column" gap="sm">
+              {state.value.map((_, index) => (
+                <Card
+                  key={index}
+                  shadow="sm"
+                  padding="lg"
+                  radius="md"
+                  withBorder
+                >
+                  <Grid>
+                    <Grid.Col span={6}>
+                      <Field
+                        name={`words[${index}].word`}
+                        children={(field) => (
+                          <TextInput
+                            label="Word"
+                            placeholder="Enter word"
+                            data-autofocus
+                            withAsterisk
+                            value={field.state.value}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                          />
+                        )}
+                      />
+                    </Grid.Col>
 
-            <Grid.Col span={6}>
-              <Field
-                name={`[${index}].meaning`}
-                children={(field) => (
-                  <TextInput
-                    label="Meaning"
-                    placeholder="Meaning of word"
-                    withAsterisk
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                )}
-              />
-            </Grid.Col>
+                    <Grid.Col span={6}>
+                      <Field
+                        name={`words[${index}].meaning`}
+                        children={(field) => (
+                          <TextInput
+                            label="Meaning"
+                            placeholder="Meaning of word"
+                            withAsterisk
+                            value={field.state.value}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                          />
+                        )}
+                      />
+                    </Grid.Col>
 
-            <Grid.Col span={12}>
-              <Field
-                name={`[${index}].definition`}
-                children={(field) => (
-                  <TextInput
-                    label="Definition"
-                    placeholder="Definition of word"
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                )}
-              />
-            </Grid.Col>
+                    <Grid.Col span={12}>
+                      <Field
+                        name={`words[${index}].definition`}
+                        children={(field) => (
+                          <TextInput
+                            label="Definition"
+                            placeholder="Definition of word"
+                            value={field.state.value}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                          />
+                        )}
+                      />
+                    </Grid.Col>
 
-            <Grid.Col span={12}>
-              <Field
-                name={`[${index}].example`}
-                children={(field) => (
-                  <Textarea
-                    label="Example"
-                    placeholder="Enter example"
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                )}
-              />
-            </Grid.Col>
-          </Grid>
-        )
-      })}
+                    <Grid.Col span={12}>
+                      <Field
+                        name={`words[${index}].example`}
+                        children={(field) => (
+                          <Textarea
+                            label="Example"
+                            placeholder="Enter example"
+                            value={field.state.value}
+                            onChange={(e) => field.handleChange(e.target.value)}
+                          />
+                        )}
+                      />
+                    </Grid.Col>
 
-      <Button.Group>
-        <Button
-          variant="subtle"
-          onClick={() => insertFieldValue('', 1)}
-          mt="md"
-        >
-          <IconPlus color="var(--mantine-color-red-text)" />
-          {/* Add more */}
-        </Button>
-        <Button fullWidth onClick={() => modals.closeAll()} mt="md">
-          Submit
-        </Button>
-      </Button.Group>
+                    {state.value.length > 1 && (
+                      <Grid.Col span={12}>
+                        <Flex justify="end">
+                          <Button
+                            variant="subtle"
+                            onClick={() => removeValue(index)}
+                            color="red"
+                          >
+                            <IconTrash />
+                          </Button>
+                        </Flex>
+                      </Grid.Col>
+                    )}
+                  </Grid>
+                </Card>
+              ))}
+            </Flex>
+
+            <Button.Group mt="sm">
+              <Button variant="outline" onClick={() => pushValue(initWord)}>
+                <IconPlus />
+              </Button>
+              <Button fullWidth onClick={handleSubmit}>
+                Submit
+              </Button>
+            </Button.Group>
+          </>
+        )}
+      </Field>
     </>
   )
 }
