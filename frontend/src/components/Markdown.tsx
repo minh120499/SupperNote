@@ -3,7 +3,14 @@ import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 import Mark from 'mark.js'
 import { memo, useEffect, useRef, useState } from 'react'
-import { ActionIcon, Box, Input, ScrollArea, Textarea } from '@mantine/core'
+import {
+  ActionIcon,
+  Box,
+  Input,
+  Paper,
+  ScrollArea,
+  Textarea,
+} from '@mantine/core'
 import { IconBook } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import {
@@ -49,7 +56,7 @@ const MarkdownComponent = ({
   }, [searchWords, content, isOpenSearch])
 
   return (
-    <Box style={{ width: '100%' }} id="mdx" display={'flex'}>
+    <Box style={{ width: '100%', gap: 4 }} id="mdx" display={'flex'}>
       {isOpenSearch && (
         <Input
           autoFocus
@@ -59,7 +66,6 @@ const MarkdownComponent = ({
           }}
         />
       )}
-      {/* <GridCol span={opened ? 6 : 12} pos="relative"> */}
       <Box
         style={{ width: opened ? '50%' : '100%', gap: '4px' }}
         pos="relative"
@@ -81,11 +87,9 @@ const MarkdownComponent = ({
           name="markdown"
         />
       </Box>
-      {/* </GridCol> */}
 
       {opened && (
-        // <GridCol span={6}>
-        <Box style={{ width: '50%' }} pos="relative">
+        <Paper style={{ width: '50%' }} shadow="xl" p={'sm'} withBorder>
           <ScrollArea h={650}>
             <div ref={contentRef}>
               <ReactMarkdown rehypePlugins={[rehypeRaw, remarkGfm]}>
@@ -93,8 +97,7 @@ const MarkdownComponent = ({
               </ReactMarkdown>
             </div>
           </ScrollArea>
-        </Box>
-        // </GridCol>
+        </Paper>
       )}
     </Box>
   )

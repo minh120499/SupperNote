@@ -10,8 +10,8 @@ import { useParams } from '@tanstack/react-router'
 import type { CategoryType } from '@/types/AppType'
 import { EnglishSideBar } from '@/components/english/EnglishSideBar'
 import { Markdown } from '@/components/Markdown'
-import { englishUnits } from '@/data/english/englishUnitListData'
 import { appRouter } from '@/main'
+import { getKnowledgeFileContent } from '@/utils/knowledge'
 
 interface KnowledgeDetailPageProps {
   category: CategoryType
@@ -24,22 +24,24 @@ export const KnowledgeDetailPage = ({ category }: KnowledgeDetailPageProps) => {
     appRouter.navigate({ to: path })
   }
 
-  const file = `/src/docs/${category}/${unit}.md`
-
   return (
     <Grid>
       <GridCol span={4}>
         <Breadcrumbs>
-          <Anchor onClick={() => handleClick('/knowledges/english')}>
+          <Anchor onClick={() => handleClick(`/knowledges/${category}`)}>
             {category.toUpperCase()}
           </Anchor>
-          <Anchor onClick={() => handleClick(`/knowledges/english/${unit}`)}>
+          <Anchor
+            onClick={() => handleClick(`/knowledges/${category}/${unit}`)}
+          >
             {unit}
           </Anchor>
         </Breadcrumbs>
       </GridCol>
       <GridCol span={8}>
-        <Button onClick={() => handleClick(`/knowledges/english/${unit}/edit`)}>
+        <Button
+          onClick={() => handleClick(`/knowledges/${category}/${unit}/edit`)}
+        >
           Edit
         </Button>
       </GridCol>
@@ -49,7 +51,10 @@ export const KnowledgeDetailPage = ({ category }: KnowledgeDetailPageProps) => {
       </Grid.Col>
       <Grid.Col span={8}>
         <ScrollArea>
-          <Markdown content={englishUnits[file]} onChange={() => {}} />
+          <Markdown
+            content={getKnowledgeFileContent(category, unit)}
+            onChange={() => {}}
+          />
         </ScrollArea>
       </Grid.Col>
     </Grid>

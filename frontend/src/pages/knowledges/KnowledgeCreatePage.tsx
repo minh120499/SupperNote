@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Button, Grid, GridCol, Input } from '@mantine/core'
+import { Alert, Button, Grid, GridCol, Input } from '@mantine/core'
 import { debounce } from 'lodash'
 import type { ChangeEvent } from 'react'
 import { Markdown } from '@/components/Markdown'
 import { handleSaveFile } from '@/utils/files'
+import { IconInfoCircle } from '@tabler/icons-react'
 
 const initialMarkdown = `# Welcome to Markdown Editor
 
@@ -49,7 +50,12 @@ export const KnowledgesCreatePage = () => {
   )
 
   return (
-    <Grid gutter="xs">
+    <Grid gutter="xs" mt={12}>
+      <GridCol>
+        <Alert icon={<IconInfoCircle />}>
+          Save in /frontend/src/docs/[folder_name]
+        </Alert>
+      </GridCol>
       <GridCol span={3}>
         <Input
           placeholder="File name"
@@ -62,7 +68,9 @@ export const KnowledgesCreatePage = () => {
         <Button onClick={handleDownload}>Create</Button>
       </GridCol>
 
-      <Markdown onChange={handleChangeMarkdown} content={markdown} />
+      <GridCol span={12}>
+        <Markdown onChange={handleChangeMarkdown} content={markdown} />
+      </GridCol>
     </Grid>
   )
 }

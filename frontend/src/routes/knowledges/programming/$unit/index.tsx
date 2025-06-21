@@ -2,5 +2,5 @@ import { createFileRoute } from '@tanstack/react-router'
 import { KnowledgeDetailPage } from '@/pages/knowledges/KnowledgeDetailPage'
 
 export const Route = createFileRoute('/knowledges/programming/$unit/')({
-  component: () => <KnowledgeDetailPage category="english" />,
+  component: () => <KnowledgeDetailPage category="programming" />,
 })
