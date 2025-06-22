@@ -6,7 +6,9 @@ import { Markdown } from '@/components/Markdown'
 import { handleSaveFile } from '@/utils/files'
 import { IconInfoCircle } from '@tabler/icons-react'
 
-const initialMarkdown = `# Welcome to Markdown Editor
+const initialMarkdown =
+  localStorage.getItem('markdown') ||
+  `# Welcome to Markdown Editor
 
 Edit this text on the left!
 
@@ -24,7 +26,13 @@ console.log('Hello, world!');
 > Blockquote here
 `
 
-export const KnowledgesCreatePage = () => {
+interface KnowledgesCreatePageProps {
+  category: string
+}
+
+export const KnowledgesCreatePage = ({
+  category,
+}: KnowledgesCreatePageProps) => {
   const [markdown, setMarkdown] = useState(initialMarkdown)
   const [fileName, setFileName] = useState('')
 
@@ -44,6 +52,7 @@ export const KnowledgesCreatePage = () => {
           setFileName(value)
           break
       }
+      localStorage.setItem('markdown', value)
     },
     500,
     { trailing: true },
@@ -53,10 +62,10 @@ export const KnowledgesCreatePage = () => {
     <Grid gutter="xs" mt={12}>
       <GridCol>
         <Alert icon={<IconInfoCircle />}>
-          Save in /frontend/src/docs/[folder_name]
+          Save in <b>/frontend/src/docs/{category}</b>
         </Alert>
       </GridCol>
-      <GridCol span={3}>
+      <GridCol span={4}>
         <Input
           placeholder="File name"
           name="fileName"

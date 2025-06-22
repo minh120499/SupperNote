@@ -8,7 +8,7 @@ export const handleSaveFile = (
 
   const a = document.createElement('a')
   a.href = url
-  a.download = fileName
+  a.download = fileName.replaceAll(' ', '_') // Replace spaces with underscores
   document.body.appendChild(a)
   a.click()
   document.body.removeChild(a)
