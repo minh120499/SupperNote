@@ -3,8 +3,8 @@
 > Hibernate: là thư viện ORM
 
 > ORM là một kỹ thuật lập trình giúp ánh xạ giữa Object với Table trong csdl. Thay vì query thủ công thì có thể gọi hàm `repository.findBy()`. Thực thi các đặc tả
->
-> > JPA (JAVA persistence API) là một đặc tả (specification) trong JAVA, chuẩn hóa các ánh xạ dữ object với bảng dữ liệu. Là bộ quy tắc và API chuẩn để thư viện cài đặt theo.
+
+> JPA (JAVA persistence API) là một đặc tả (specification) trong JAVA, chuẩn hóa các ánh xạ dữ object với bảng dữ liệu. Là bộ quy tắc và API chuẩn để thư viện cài đặt theo.
 
 ## 1. Sử dụng JPA với Hibernate (cách phổ biến nhất)
 
