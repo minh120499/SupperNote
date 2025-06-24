@@ -15,6 +15,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as TravelsIndexImport } from './routes/travels/index'
+import { Route as TestIndexImport } from './routes/test/index'
 import { Route as NotesIndexImport } from './routes/notes/index'
 import { Route as KnowledgesIndexImport } from './routes/knowledges/index'
 import { Route as FinancesIndexImport } from './routes/finances/index'
@@ -65,6 +66,12 @@ const TravelsIndexRoute = TravelsIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => TravelsRoute,
+} as any)
+
+const TestIndexRoute = TestIndexImport.update({
+  id: '/test/',
+  path: '/test/',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const NotesIndexRoute = NotesIndexImport.update({
@@ -268,6 +275,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesIndexImport
       parentRoute: typeof NotesImport
     }
+    '/test/': {
+      id: '/test/'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/travels/': {
       id: '/travels/'
       path: '/'
@@ -448,6 +462,7 @@ export interface FileRoutesByFullPath {
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
   '/notes/': typeof NotesIndexRoute
+  '/test': typeof TestIndexRoute
   '/travels/': typeof TravelsIndexRoute
   '/knowledges/english/create': typeof KnowledgesEnglishCreateRoute
   '/knowledges/english/vocabularies': typeof KnowledgesEnglishVocabulariesRoute
@@ -472,6 +487,7 @@ export interface FileRoutesByTo {
   '/about_us': typeof AboutusIndexRoute
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
+  '/test': typeof TestIndexRoute
   '/knowledges/english/create': typeof KnowledgesEnglishCreateRoute
   '/knowledges/english/vocabularies': typeof KnowledgesEnglishVocabulariesRoute
   '/knowledges/programming/create': typeof KnowledgesProgrammingCreateRoute
@@ -499,6 +515,7 @@ export interface FileRoutesById {
   '/finances/': typeof FinancesIndexRoute
   '/knowledges/': typeof KnowledgesIndexRoute
   '/notes/': typeof NotesIndexRoute
+  '/test/': typeof TestIndexRoute
   '/travels/': typeof TravelsIndexRoute
   '/knowledges/english/create': typeof KnowledgesEnglishCreateRoute
   '/knowledges/english/vocabularies': typeof KnowledgesEnglishVocabulariesRoute
@@ -526,6 +543,7 @@ export interface FileRouteTypes {
     | '/finances'
     | '/knowledges'
     | '/notes/'
+    | '/test'
     | '/travels/'
     | '/knowledges/english/create'
     | '/knowledges/english/vocabularies'
@@ -549,6 +567,7 @@ export interface FileRouteTypes {
     | '/about_us'
     | '/finances'
     | '/knowledges'
+    | '/test'
     | '/knowledges/english/create'
     | '/knowledges/english/vocabularies'
     | '/knowledges/programming/create'
@@ -574,6 +593,7 @@ export interface FileRouteTypes {
     | '/finances/'
     | '/knowledges/'
     | '/notes/'
+    | '/test/'
     | '/travels/'
     | '/knowledges/english/create'
     | '/knowledges/english/vocabularies'
@@ -599,6 +619,7 @@ export interface RootRouteChildren {
   AboutusIndexRoute: typeof AboutusIndexRoute
   FinancesIndexRoute: typeof FinancesIndexRoute
   KnowledgesIndexRoute: typeof KnowledgesIndexRoute
+  TestIndexRoute: typeof TestIndexRoute
   KnowledgesEnglishCreateRoute: typeof KnowledgesEnglishCreateRoute
   KnowledgesEnglishVocabulariesRoute: typeof KnowledgesEnglishVocabulariesRoute
   KnowledgesProgrammingCreateRoute: typeof KnowledgesProgrammingCreateRoute
@@ -616,6 +637,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutusIndexRoute: AboutusIndexRoute,
   FinancesIndexRoute: FinancesIndexRoute,
   KnowledgesIndexRoute: KnowledgesIndexRoute,
+  TestIndexRoute: TestIndexRoute,
   KnowledgesEnglishCreateRoute: KnowledgesEnglishCreateRoute,
   KnowledgesEnglishVocabulariesRoute: KnowledgesEnglishVocabulariesRoute,
   KnowledgesProgrammingCreateRoute: KnowledgesProgrammingCreateRoute,
@@ -642,6 +664,7 @@ export const routeTree = rootRoute
         "/about_us/",
         "/finances/",
         "/knowledges/",
+        "/test/",
         "/knowledges/english/create",
         "/knowledges/english/vocabularies",
         "/knowledges/programming/create",
@@ -699,6 +722,9 @@ export const routeTree = rootRoute
     "/notes/": {
       "filePath": "notes/index.tsx",
       "parent": "/notes"
+    },
+    "/test/": {
+      "filePath": "test/index.tsx"
     },
     "/travels/": {
       "filePath": "travels/index.tsx",
