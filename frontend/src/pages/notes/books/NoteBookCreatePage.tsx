@@ -6,6 +6,7 @@ import type { NoteBook } from '@/types/NoteBook'
 import { handleSaveFile } from '@/utils/files'
 import { appRouter } from '@/main'
 import { fetchNoteBooks } from '@/api/noteBookApi'
+import { fetchPersonalExpenses } from '@/api/personalExpenseApi'
 
 export const NoteBookCreatePage = () => {
   const { id } = useParams({ strict: false })
@@ -15,6 +16,17 @@ export const NoteBookCreatePage = () => {
     queryFn: fetchNoteBooks,
     refetchOnWindowFocus: false,
   })
+
+  const { data: test } = useQuery({
+    queryKey: [],
+    queryFn: fetchPersonalExpenses,
+    refetchOnWindowFocus: false,
+    retry: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  })
+
+  console.log(test)
 
   const currentBook = books?.find((book) => book.id === Number(id))
 
