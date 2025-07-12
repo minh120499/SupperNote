@@ -1,4 +1,4 @@
-package com.supper_note.services.modules.personalExpense.domain;
+package com.supper_note.services.modules.personalExpense.infrastructure.persistence;
 
 import com.supper_note.services.shared.enums.ExpenseType;
 import com.supper_note.services.shared.model.Auditable;
@@ -10,9 +10,9 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Entity
-@Table
+@Table(name = "personal_expense")
 @Getter
-public class PersonalExpense extends Auditable {
+public class PersonalExpenseEntity extends Auditable {
     @Id
     private Long id;
     private Long userId;

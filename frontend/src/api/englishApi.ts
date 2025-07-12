@@ -1,8 +1,8 @@
-import apiClient from './apiClient'
+import apiLocalClient from './apiLocalClient'
 import type { EnglishVocabularie } from '@/types/KnowledgeEnglish'
 
 export const fetchEnglishVocabularies = async () => {
-  const res = await apiClient.get<Array<EnglishVocabularie>>(
+  const res = await apiLocalClient.get<Array<EnglishVocabularie>>(
     '/knowledges/englishVocabularies.json',
   )
   return res.data

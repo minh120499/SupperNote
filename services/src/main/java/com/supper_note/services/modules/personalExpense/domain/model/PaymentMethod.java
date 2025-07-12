@@ -1,4 +1,4 @@
-package com.supper_note.services.modules.personalExpense.domain;
+package com.supper_note.services.modules.personalExpense.domain.model;
 
 import com.supper_note.services.shared.enums.PaymentType;
 import com.supper_note.services.shared.model.Auditable;

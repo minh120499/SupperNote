@@ -1,5 +1,7 @@
-package com.supper_note.services.modules.personalExpense.infrastructure;
+package com.supper_note.services.modules.personalExpense.interfaces.res;
 
+import com.supper_note.services.modules.personalExpense.application.PersonalExpenseUseCase;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(("/api/personal_expense"))
+@AllArgsConstructor
 public class PersonalExpenseController {
+    private final PersonalExpenseUseCase personalExpenseUseCase;
+
     @GetMapping
     public List<Integer> getPersonalExpense() {
         List<Integer> result = new ArrayList<>();
@@ -19,6 +24,7 @@ public class PersonalExpenseController {
         result.add(1);
         result.add(1);
         result.add(1);
+        var a = personalExpenseUseCase.getAllPersonalExpense();
         return result;
     }
 

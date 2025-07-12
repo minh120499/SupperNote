@@ -53,6 +53,10 @@ const menus: Array<MenuItems> = [
     label: <LinkComponent to="/about_us">About us</LinkComponent>,
     key: 'aboutUs',
   },
+  {
+    label: <LinkComponent to="/expenses">Expenses</LinkComponent>,
+    key: 'expenses',
+  },
 ]
 
 export const NavBar = () => {

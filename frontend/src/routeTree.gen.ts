@@ -19,6 +19,7 @@ import { Route as TestIndexImport } from './routes/test/index'
 import { Route as NotesIndexImport } from './routes/notes/index'
 import { Route as KnowledgesIndexImport } from './routes/knowledges/index'
 import { Route as FinancesIndexImport } from './routes/finances/index'
+import { Route as ExpensesIndexImport } from './routes/expenses/index'
 import { Route as AboutusIndexImport } from './routes/about_us/index'
 import { Route as TravelsPathlessLayoutRouteImport } from './routes/travels/_pathlessLayout/route'
 import { Route as NotesPathlessLayoutRouteImport } from './routes/notes/_pathlessLayout/route'
@@ -89,6 +90,12 @@ const KnowledgesIndexRoute = KnowledgesIndexImport.update({
 const FinancesIndexRoute = FinancesIndexImport.update({
   id: '/finances/',
   path: '/finances/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExpensesIndexRoute = ExpensesIndexImport.update({
+  id: '/expenses/',
+  path: '/expenses/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -252,6 +259,13 @@ declare module '@tanstack/react-router' {
       path: '/about_us'
       fullPath: '/about_us'
       preLoaderRoute: typeof AboutusIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/expenses/': {
+      id: '/expenses/'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof ExpensesIndexImport
       parentRoute: typeof rootRoute
     }
     '/finances/': {
@@ -459,6 +473,7 @@ export interface FileRoutesByFullPath {
   '/notes': typeof NotesPathlessLayoutRouteRouteWithChildren
   '/travels': typeof TravelsPathlessLayoutRouteRouteWithChildren
   '/about_us': typeof AboutusIndexRoute
+  '/expenses': typeof ExpensesIndexRoute
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
   '/notes/': typeof NotesIndexRoute
@@ -485,6 +500,7 @@ export interface FileRoutesByTo {
   '/notes': typeof NotesIndexRoute
   '/travels': typeof TravelsIndexRoute
   '/about_us': typeof AboutusIndexRoute
+  '/expenses': typeof ExpensesIndexRoute
   '/finances': typeof FinancesIndexRoute
   '/knowledges': typeof KnowledgesIndexRoute
   '/test': typeof TestIndexRoute
@@ -512,6 +528,7 @@ export interface FileRoutesById {
   '/travels': typeof TravelsRouteWithChildren
   '/travels/_pathlessLayout': typeof TravelsPathlessLayoutRouteRouteWithChildren
   '/about_us/': typeof AboutusIndexRoute
+  '/expenses/': typeof ExpensesIndexRoute
   '/finances/': typeof FinancesIndexRoute
   '/knowledges/': typeof KnowledgesIndexRoute
   '/notes/': typeof NotesIndexRoute
@@ -540,6 +557,7 @@ export interface FileRouteTypes {
     | '/notes'
     | '/travels'
     | '/about_us'
+    | '/expenses'
     | '/finances'
     | '/knowledges'
     | '/notes/'
@@ -565,6 +583,7 @@ export interface FileRouteTypes {
     | '/notes'
     | '/travels'
     | '/about_us'
+    | '/expenses'
     | '/finances'
     | '/knowledges'
     | '/test'
@@ -590,6 +609,7 @@ export interface FileRouteTypes {
     | '/travels'
     | '/travels/_pathlessLayout'
     | '/about_us/'
+    | '/expenses/'
     | '/finances/'
     | '/knowledges/'
     | '/notes/'
@@ -617,6 +637,7 @@ export interface RootRouteChildren {
   NotesRoute: typeof NotesRouteWithChildren
   TravelsRoute: typeof TravelsRouteWithChildren
   AboutusIndexRoute: typeof AboutusIndexRoute
+  ExpensesIndexRoute: typeof ExpensesIndexRoute
   FinancesIndexRoute: typeof FinancesIndexRoute
   KnowledgesIndexRoute: typeof KnowledgesIndexRoute
   TestIndexRoute: typeof TestIndexRoute
@@ -635,6 +656,7 @@ const rootRouteChildren: RootRouteChildren = {
   NotesRoute: NotesRouteWithChildren,
   TravelsRoute: TravelsRouteWithChildren,
   AboutusIndexRoute: AboutusIndexRoute,
+  ExpensesIndexRoute: ExpensesIndexRoute,
   FinancesIndexRoute: FinancesIndexRoute,
   KnowledgesIndexRoute: KnowledgesIndexRoute,
   TestIndexRoute: TestIndexRoute,
@@ -662,6 +684,7 @@ export const routeTree = rootRoute
         "/notes",
         "/travels",
         "/about_us/",
+        "/expenses/",
         "/finances/",
         "/knowledges/",
         "/test/",
@@ -712,6 +735,9 @@ export const routeTree = rootRoute
     },
     "/about_us/": {
       "filePath": "about_us/index.tsx"
+    },
+    "/expenses/": {
+      "filePath": "expenses/index.tsx"
     },
     "/finances/": {
       "filePath": "finances/index.tsx"
