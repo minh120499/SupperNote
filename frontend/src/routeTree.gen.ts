@@ -21,6 +21,7 @@ import { Route as KnowledgesIndexImport } from './routes/knowledges/index'
 import { Route as FinancesIndexImport } from './routes/finances/index'
 import { Route as ExpensesIndexImport } from './routes/expenses/index'
 import { Route as AboutusIndexImport } from './routes/about_us/index'
+import { Route as ExpensesCreateImport } from './routes/expenses/create'
 import { Route as TravelsPathlessLayoutRouteImport } from './routes/travels/_pathlessLayout/route'
 import { Route as NotesPathlessLayoutRouteImport } from './routes/notes/_pathlessLayout/route'
 import { Route as KnowledgesProgrammingIndexImport } from './routes/knowledges/programming/index'
@@ -102,6 +103,12 @@ const ExpensesIndexRoute = ExpensesIndexImport.update({
 const AboutusIndexRoute = AboutusIndexImport.update({
   id: '/about_us/',
   path: '/about_us/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExpensesCreateRoute = ExpensesCreateImport.update({
+  id: '/expenses/create',
+  path: '/expenses/create',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -253,6 +260,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/travels'
       preLoaderRoute: typeof TravelsPathlessLayoutRouteImport
       parentRoute: typeof TravelsRoute
+    }
+    '/expenses/create': {
+      id: '/expenses/create'
+      path: '/expenses/create'
+      fullPath: '/expenses/create'
+      preLoaderRoute: typeof ExpensesCreateImport
+      parentRoute: typeof rootRoute
     }
     '/about_us/': {
       id: '/about_us/'
@@ -472,6 +486,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/notes': typeof NotesPathlessLayoutRouteRouteWithChildren
   '/travels': typeof TravelsPathlessLayoutRouteRouteWithChildren
+  '/expenses/create': typeof ExpensesCreateRoute
   '/about_us': typeof AboutusIndexRoute
   '/expenses': typeof ExpensesIndexRoute
   '/finances': typeof FinancesIndexRoute
@@ -499,6 +514,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/notes': typeof NotesIndexRoute
   '/travels': typeof TravelsIndexRoute
+  '/expenses/create': typeof ExpensesCreateRoute
   '/about_us': typeof AboutusIndexRoute
   '/expenses': typeof ExpensesIndexRoute
   '/finances': typeof FinancesIndexRoute
@@ -527,6 +543,7 @@ export interface FileRoutesById {
   '/notes/_pathlessLayout': typeof NotesPathlessLayoutRouteRouteWithChildren
   '/travels': typeof TravelsRouteWithChildren
   '/travels/_pathlessLayout': typeof TravelsPathlessLayoutRouteRouteWithChildren
+  '/expenses/create': typeof ExpensesCreateRoute
   '/about_us/': typeof AboutusIndexRoute
   '/expenses/': typeof ExpensesIndexRoute
   '/finances/': typeof FinancesIndexRoute
@@ -556,6 +573,7 @@ export interface FileRouteTypes {
     | '/'
     | '/notes'
     | '/travels'
+    | '/expenses/create'
     | '/about_us'
     | '/expenses'
     | '/finances'
@@ -582,6 +600,7 @@ export interface FileRouteTypes {
     | '/'
     | '/notes'
     | '/travels'
+    | '/expenses/create'
     | '/about_us'
     | '/expenses'
     | '/finances'
@@ -608,6 +627,7 @@ export interface FileRouteTypes {
     | '/notes/_pathlessLayout'
     | '/travels'
     | '/travels/_pathlessLayout'
+    | '/expenses/create'
     | '/about_us/'
     | '/expenses/'
     | '/finances/'
@@ -636,6 +656,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NotesRoute: typeof NotesRouteWithChildren
   TravelsRoute: typeof TravelsRouteWithChildren
+  ExpensesCreateRoute: typeof ExpensesCreateRoute
   AboutusIndexRoute: typeof AboutusIndexRoute
   ExpensesIndexRoute: typeof ExpensesIndexRoute
   FinancesIndexRoute: typeof FinancesIndexRoute
@@ -655,6 +676,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   NotesRoute: NotesRouteWithChildren,
   TravelsRoute: TravelsRouteWithChildren,
+  ExpensesCreateRoute: ExpensesCreateRoute,
   AboutusIndexRoute: AboutusIndexRoute,
   ExpensesIndexRoute: ExpensesIndexRoute,
   FinancesIndexRoute: FinancesIndexRoute,
@@ -683,6 +705,7 @@ export const routeTree = rootRoute
         "/",
         "/notes",
         "/travels",
+        "/expenses/create",
         "/about_us/",
         "/expenses/",
         "/finances/",
@@ -732,6 +755,9 @@ export const routeTree = rootRoute
         "/travels/_pathlessLayout/coffees/",
         "/travels/_pathlessLayout/foods/"
       ]
+    },
+    "/expenses/create": {
+      "filePath": "expenses/create.tsx"
     },
     "/about_us/": {
       "filePath": "about_us/index.tsx"

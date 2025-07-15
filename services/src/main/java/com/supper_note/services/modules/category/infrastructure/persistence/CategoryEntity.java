@@ -1,4 +1,4 @@
-package com.supper_note.services.modules.personalExpense.infrastructure.persistence;
+package com.supper_note.services.modules.category.infrastructure.persistence;
 
 import com.supper_note.services.shared.enums.ExpenseType;
 import com.supper_note.services.shared.model.Auditable;
@@ -10,16 +10,13 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "personal_expense")
+@Table(name = "category")
 @Getter
-public class PersonalExpenseEntity extends Auditable {
+public class CategoryEntity extends Auditable {
     @Id
     private Long id;
     private Long userId;
-
     private String title;
-    private BigDecimal amount;
-    private ExpenseType type;
-    private String category;
+    private String type;
     private String description;
 }

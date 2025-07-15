@@ -29,4 +29,8 @@ dependencies {
 
     // PostgreSQL JDBC Driver
     implementation("org.postgresql:postgresql:42.7.3")
+
+    // MapStruct  v1.5.5
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 }

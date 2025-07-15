@@ -19,4 +19,9 @@ public class PersonalExpenseService implements PersonalExpenseUseCase {
     public List<PersonalExpense> getAllPersonalExpense() {
         return personalExpenseRepository.findAllByUserId(1L);
     }
+
+    @Override
+    public PersonalExpense savePersonalExpense(PersonalExpense personalExpense) {
+        return null;
+    }
 }

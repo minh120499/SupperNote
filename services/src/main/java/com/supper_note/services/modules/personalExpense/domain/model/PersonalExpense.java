@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public class PersonalExpense {
     private Long id;
     private Long userId;
+    private String title;
     private BigDecimal amount;
     private ExpenseType type;
     private String category;
