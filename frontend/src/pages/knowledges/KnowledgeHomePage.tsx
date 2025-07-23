@@ -1,7 +1,8 @@
 import { Box, Button, Grid } from '@mantine/core'
-import type { CategoryType } from '@/types/AppType'
-import { appRouter } from '@/main'
+
 import { LinkComponent } from '@/components/ui/LinkComponent'
+import { appRouter } from '@/main'
+import type { CategoryType } from '@/types/AppType'
 import { getKnowledgeCategory } from '@/utils/knowledge'
 
 interface KnowledgeHomePageProps {
@@ -22,7 +23,7 @@ export const KnowledgesHomePage = ({ category }: KnowledgeHomePageProps) => {
       </Box>
 
       <Grid>
-        {getKnowledgeCategory(category).map((knowledgeCategory) => (
+        {getKnowledgeCategory(category).map(knowledgeCategory => (
           <Grid.Col key={knowledgeCategory} span={4}>
             <LinkComponent
               to={`/knowledges/${category}/$unit`}

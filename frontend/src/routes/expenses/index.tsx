@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+
 import { ExpensesListPage } from '@/pages/expenses/ExpensesListPage'
 
 export const Route = createFileRoute('/expenses/')({

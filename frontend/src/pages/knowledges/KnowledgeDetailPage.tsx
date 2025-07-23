@@ -7,10 +7,11 @@ import {
   ScrollArea,
 } from '@mantine/core'
 import { useParams } from '@tanstack/react-router'
-import type { CategoryType } from '@/types/AppType'
-import { EnglishSideBar } from '@/components/english/EnglishSideBar'
+
 import { Markdown } from '@/components/Markdown'
+import { EnglishSideBar } from '@/components/english/EnglishSideBar'
 import { appRouter } from '@/main'
+import type { CategoryType } from '@/types/AppType'
 import { getKnowledgeFileContent } from '@/utils/knowledge'
 
 interface KnowledgeDetailPageProps {

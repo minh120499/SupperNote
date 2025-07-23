@@ -1,6 +1,8 @@
 import { Box, Text } from '@mantine/core'
 import { createFileRoute } from '@tanstack/react-router'
+
 import { useRef, useState } from 'react'
+
 import image4K_0 from './image0.png'
 import image4K_1 from './image1.png'
 
@@ -20,7 +22,7 @@ function RouteComponent() {
   const [offset, setOffset] = useState(0)
   const [scaleOut, setScaleOut] = useState(0)
 
-  window.addEventListener('scroll', (event) => {
+  window.addEventListener('scroll', event => {
     const currentScroll = window.pageYOffset
 
     setPageYOffset(currentScroll)

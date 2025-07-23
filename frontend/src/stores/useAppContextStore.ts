@@ -1,4 +1,5 @@
 import { Store, useStore } from '@tanstack/react-store'
+
 import { useEffect } from 'react'
 
 export interface AppContext {
@@ -23,10 +24,10 @@ const initState = (): AppContext => {
 const appContextState = new Store<AppContext>(initState())
 
 export const useAppContextStore = () => {
-  const appContext = useStore(appContextState, (state) => state)
+  const appContext = useStore(appContextState, state => state)
 
   const toggleDarkMode = () => {
-    appContextState.setState((prev) => ({
+    appContextState.setState(prev => ({
       ...prev,
       isDarkMode: !prev.isDarkMode,
     }))

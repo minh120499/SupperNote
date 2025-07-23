@@ -1,6 +1,7 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetchPersonalExpenses } from '@/api/personalExpenseApi'
 import { Button } from '@mantine/core'
+import { useQuery } from '@tanstack/react-query'
+
+import { fetchPersonalExpenses } from '@/api/personalExpenseApi'
 import { appRouter } from '@/main'
 
 export const ExpensesListPage = () => {

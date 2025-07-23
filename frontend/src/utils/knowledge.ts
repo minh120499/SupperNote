@@ -13,7 +13,7 @@ export const getKnowledgeCategory = (category: CategoryType) => {
       break
   }
 
-  return Object.keys(knowledge).map((unit) =>
+  return Object.keys(knowledge).map(unit =>
     unit.replace(`/src/docs/${category}/`, ''),
   )
 }

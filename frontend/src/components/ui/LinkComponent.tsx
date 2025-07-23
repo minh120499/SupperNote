@@ -1,8 +1,9 @@
-import { Link as RouterLink } from '@tanstack/react-router'
 import { Anchor } from '@mantine/core'
-import { forwardRef } from 'react'
-import type { LinkProps as RouterLinkProps } from '@tanstack/react-router'
 import type { AnchorProps } from '@mantine/core'
+import { Link as RouterLink } from '@tanstack/react-router'
+import type { LinkProps as RouterLinkProps } from '@tanstack/react-router'
+
+import { forwardRef } from 'react'
 
 type CombinedLinkProps = AnchorProps & RouterLinkProps
 

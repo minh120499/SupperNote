@@ -1,8 +1,3 @@
-import ReactMarkdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
-import remarkGfm from 'remark-gfm'
-import Mark from 'mark.js'
-import { memo, useEffect, useRef, useState } from 'react'
 import {
   ActionIcon,
   Box,
@@ -11,8 +6,16 @@ import {
   ScrollArea,
   Textarea,
 } from '@mantine/core'
-import { IconBook } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
+import { IconBook } from '@tabler/icons-react'
+import Mark from 'mark.js'
+import rehypeRaw from 'rehype-raw'
+import remarkGfm from 'remark-gfm'
+
+import { memo, useEffect, useRef, useState } from 'react'
+
+import ReactMarkdown from 'react-markdown'
+
 import {
   KeyboardShortcut,
   useKeyboardShortcut,
@@ -61,7 +64,7 @@ const MarkdownComponent = ({
         <Input
           autoFocus
           value={searchWords}
-          onChange={(e) => {
+          onChange={e => {
             setSearchWords(e.target.value)
           }}
         />

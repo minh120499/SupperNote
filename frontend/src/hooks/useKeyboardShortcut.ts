@@ -20,7 +20,7 @@ export const useKeyboardShortcut = () => {
         event.preventDefault()
         const shortKey = 'control+' + event.key.toLowerCase()
         setShortcutKeyboard(shortKey)
-        setUsedShortKey((prev) => ({
+        setUsedShortKey(prev => ({
           ...prev,
           [shortKey]: !prev[shortKey],
         }))

@@ -23,6 +23,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+    // Spring Boot DevTools (tùy chọn, hữu ích cho quá trình phát triển)
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
     //	lombok v1.19.30
     compileOnly("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
@@ -33,4 +36,11 @@ dependencies {
     // MapStruct  v1.5.5
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+
+    // Thư viện Jackson Databind
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    // ModelMapper
+    implementation("org.modelmapper:modelmapper:3.2.0")
 }

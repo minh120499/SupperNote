@@ -1,6 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { modals } from '@mantine/modals'
 import { Button } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { createFileRoute } from '@tanstack/react-router'
+
 import { VocabularyModal } from '@/components/english/VocabularyModal'
 
 export const Route = createFileRoute('/knowledges/english/vocabularies')({

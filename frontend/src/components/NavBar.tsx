@@ -7,9 +7,11 @@ import {
   useMantineColorScheme,
 } from '@mantine/core'
 import { IconMoon, IconSun } from '@tabler/icons-react'
+
 import { Fragment } from 'react'
-import { LinkComponent } from './ui/LinkComponent'
 import type { JSX } from 'react'
+
+import { LinkComponent } from './ui/LinkComponent'
 
 interface MenuItems {
   label: JSX.Element | string
@@ -66,7 +68,7 @@ export const NavBar = () => {
     <Flex direction="row" gap="md" justify="space-between">
       <Tabs defaultValue="first">
         <Tabs.List>
-          {menus.map((menu) => (
+          {menus.map(menu => (
             <Tabs.Tab key={menu.key} value={menu.key}>
               {!menu.children ? (
                 <Fragment key={menu.key}>{menu.label}</Fragment>
@@ -77,7 +79,7 @@ export const NavBar = () => {
                   </HoverCard.Target>
                   <HoverCard.Dropdown>
                     <Flex direction="column" gap="sm">
-                      {menu.children.map((child) => (
+                      {menu.children.map(child => (
                         <Fragment key={child.key}>{child.label}</Fragment>
                       ))}
                     </Flex>

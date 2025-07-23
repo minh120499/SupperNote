@@ -1,4 +1,3 @@
-import { Outlet } from '@tanstack/react-router'
 import {
   Container,
   Flex,
@@ -7,6 +6,8 @@ import {
   createTheme,
 } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
+import { Outlet } from '@tanstack/react-router'
+
 import { NavBar } from '@/components/NavBar'
 
 const theme = createTheme({

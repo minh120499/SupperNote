@@ -3,10 +3,7 @@ package com.supper_note.services.modules.category.interfaces.rest;
 import com.supper_note.services.modules.category.application.CategoryUseCase;
 import com.supper_note.services.modules.category.domain.model.Category;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,15 +12,25 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryController {
     private final CategoryUseCase categoryUseCase;
+    private final Long userId = 1L;
 
     @GetMapping
     public List<Category> getAllCategories() {
-        return categoryUseCase.getAllCategory();
+        return categoryUseCase.getAll(userId);
     }
 
+    @GetMapping("{id}")
+    public Category getById(@PathVariable Long id) {
+        return categoryUseCase.getById(userId, id);
+    }
 
     @PostMapping
     public Category saveCategory(Category category) {
-        return categoryUseCase.saveCategory(category);
+        return categoryUseCase.save(category);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteCategory(@PathVariable Long id) {
+        categoryUseCase.deleteById(userId, id);
     }
 }

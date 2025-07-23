@@ -1,7 +1,8 @@
 import { Button, Card, Flex, Grid, TextInput, Textarea } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import { useForm } from '@tanstack/react-form'
 import { IconPlus, IconTrash } from '@tabler/icons-react'
+import { useForm } from '@tanstack/react-form'
+
 import type { EnglishVocabularie } from '@/types/KnowledgeEnglish'
 
 const initWord = {} as EnglishVocabularie
@@ -41,14 +42,14 @@ export const VocabularyModal = () => {
                     <Grid.Col span={6}>
                       <Field
                         name={`words[${index}].word`}
-                        children={(field) => (
+                        children={field => (
                           <TextInput
                             label="Word"
                             placeholder="Enter word"
                             data-autofocus
                             withAsterisk
                             value={field.state.value}
-                            onChange={(e) => field.handleChange(e.target.value)}
+                            onChange={e => field.handleChange(e.target.value)}
                           />
                         )}
                       />
@@ -57,13 +58,13 @@ export const VocabularyModal = () => {
                     <Grid.Col span={6}>
                       <Field
                         name={`words[${index}].meaning`}
-                        children={(field) => (
+                        children={field => (
                           <TextInput
                             label="Meaning"
                             placeholder="Meaning of word"
                             withAsterisk
                             value={field.state.value}
-                            onChange={(e) => field.handleChange(e.target.value)}
+                            onChange={e => field.handleChange(e.target.value)}
                           />
                         )}
                       />
@@ -72,12 +73,12 @@ export const VocabularyModal = () => {
                     <Grid.Col span={12}>
                       <Field
                         name={`words[${index}].definition`}
-                        children={(field) => (
+                        children={field => (
                           <TextInput
                             label="Definition"
                             placeholder="Definition of word"
                             value={field.state.value}
-                            onChange={(e) => field.handleChange(e.target.value)}
+                            onChange={e => field.handleChange(e.target.value)}
                           />
                         )}
                       />
@@ -86,12 +87,12 @@ export const VocabularyModal = () => {
                     <Grid.Col span={12}>
                       <Field
                         name={`words[${index}].example`}
-                        children={(field) => (
+                        children={field => (
                           <Textarea
                             label="Example"
                             placeholder="Enter example"
                             value={field.state.value}
-                            onChange={(e) => field.handleChange(e.target.value)}
+                            onChange={e => field.handleChange(e.target.value)}
                           />
                         )}
                       />

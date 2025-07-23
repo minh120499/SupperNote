@@ -1,14 +1,15 @@
-import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
+import '@mantine/core/styles.css'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 
-// Import the generated route tree
-import { routeTree } from './routeTree.gen'
+import { StrictMode } from 'react'
+
+import ReactDOM from 'react-dom/client'
 
 // import './styles.css'
 // import './App.css'
 import reportWebVitals from './reportWebVitals.ts'
-import '@mantine/core/styles.css'
+// Import the generated route tree
+import { routeTree } from './routeTree.gen'
 
 // Create a new router instance
 export const appRouter = createRouter({

@@ -1,5 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
 import { Box } from '@mantine/core'
+import { createFileRoute } from '@tanstack/react-router'
+
 import { LinkComponent } from '@/components/ui/LinkComponent'
 
 export const Route = createFileRoute('/travels/')({

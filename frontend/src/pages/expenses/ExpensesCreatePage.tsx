@@ -1,8 +1,4 @@
 import {
-  ExpenseType,
-  type PersonalExpenses,
-} from '@/api/models/PersonalExpense'
-import {
   Button,
   NumberInput,
   SegmentedControl,
@@ -10,6 +6,11 @@ import {
   TextInput,
 } from '@mantine/core'
 import { useForm } from '@tanstack/react-form'
+
+import {
+  ExpenseType,
+  type PersonalExpenses,
+} from '@/api/models/PersonalExpense'
 
 export const ExpensesCreatePage = () => {
   const form = useForm({
@@ -35,14 +36,14 @@ export const ExpensesCreatePage = () => {
     <div>
       <Field
         name="title"
-        children={(field) => {
+        children={field => {
           return (
             <TextInput
               label="Title"
               placeholder="Enter title"
               withAsterisk
               value={field.state.value}
-              onChange={(event) => field.handleChange(event.target.value)}
+              onChange={event => field.handleChange(event.target.value)}
             />
           )
         }}
@@ -50,14 +51,14 @@ export const ExpensesCreatePage = () => {
 
       <Field
         name="amount"
-        children={(field) => {
+        children={field => {
           return (
             <NumberInput
               label="Amount"
               placeholder="Enter amount"
               withAsterisk
               value={field.state.value}
-              onChange={(value) => field.handleChange(Number(value))}
+              onChange={value => field.handleChange(Number(value))}
             />
           )
         }}
@@ -65,12 +66,12 @@ export const ExpensesCreatePage = () => {
 
       <Field
         name="type"
-        children={(field) => {
+        children={field => {
           return (
             <SegmentedControl
               data={Object.values(ExpenseType)}
               value={field.state.value}
-              onChange={(value) => field.handleChange(value as ExpenseType)}
+              onChange={value => field.handleChange(value as ExpenseType)}
             />
           )
         }}
@@ -78,14 +79,14 @@ export const ExpensesCreatePage = () => {
 
       <Field
         name="category"
-        children={(field) => {
+        children={field => {
           return (
             <TagsInput
               label="Category"
               placeholder="Enter category"
               withAsterisk
               value={field.state.value}
-              onChange={(event) => field.handleChange(event.target.value)}
+              onChange={event => field.handleChange(event.target.value)}
             />
           )
         }}
@@ -93,13 +94,13 @@ export const ExpensesCreatePage = () => {
 
       <Field
         name="description"
-        children={(field) => {
+        children={field => {
           return (
             <TextInput
               label="Description"
               placeholder="Enter description"
               value={field.state.value}
-              onChange={(event) => field.handleChange(event.target.value)}
+              onChange={event => field.handleChange(event.target.value)}
             />
           )
         }}

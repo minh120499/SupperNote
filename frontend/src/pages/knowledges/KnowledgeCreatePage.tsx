@@ -1,10 +1,12 @@
-import { useState } from 'react'
 import { Alert, Button, Grid, GridCol, Input } from '@mantine/core'
+import { IconInfoCircle } from '@tabler/icons-react'
 import { debounce } from 'lodash'
+
+import { useState } from 'react'
 import type { ChangeEvent } from 'react'
+
 import { Markdown } from '@/components/Markdown'
 import { handleSaveFile } from '@/utils/files'
-import { IconInfoCircle } from '@tabler/icons-react'
 
 const initialMarkdown =
   localStorage.getItem('markdown') ||

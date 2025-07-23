@@ -1,11 +1,13 @@
 package com.supper_note.services.shared.base.application;
 
-import com.supper_note.services.modules.category.domain.model.Category;
-
 import java.util.List;
 
 public interface BaseUseCase<T> {
-    List<T> getAll();
+    List<T> getAll(Long userId);
+
+    T getById(Long userId, Long id);
 
     T save(T Category);
+
+    void deleteById(Long userId, Long id);
 }

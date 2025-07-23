@@ -1,6 +1,7 @@
 import { ActionIcon, Box, Flex, NavLink, Text } from '@mantine/core'
-import { useQuery } from '@tanstack/react-query'
 import { IconPlus } from '@tabler/icons-react'
+import { useQuery } from '@tanstack/react-query'
+
 import { fetchNoteBooks } from '@/api/noteBookApi'
 import { appRouter } from '@/main'
 
@@ -32,10 +33,10 @@ export const NoteBookListPage = () => {
 
       {isLoading && <Box>Loading...</Box>}
       {!error &&
-        books?.map((book) => (
+        books?.map(book => (
           <NavLink
             key={book.id}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault()
               appRouter.navigate({ to: '/notes/books/' + book.id })
             }}

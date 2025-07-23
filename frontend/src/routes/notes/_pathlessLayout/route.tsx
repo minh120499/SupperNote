@@ -1,5 +1,6 @@
 import { Anchor, Breadcrumbs } from '@mantine/core'
 import { Outlet, createFileRoute, useLocation } from '@tanstack/react-router'
+
 import { LinkComponent } from '@/components/ui/LinkComponent'
 
 export const Route = createFileRoute('/notes/_pathlessLayout')({

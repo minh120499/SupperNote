@@ -1,6 +1,6 @@
 package com.supper_note.services.modules.food.domain;
 
-import com.supper_note.services.shared.BaseStatus;
+import com.supper_note.services.shared.enums.BaseStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
