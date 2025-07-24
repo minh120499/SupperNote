@@ -2,9 +2,7 @@ package com.supper_note.services.modules.personalExpense.infrastructure.persiste
 
 import com.supper_note.services.shared.enums.ExpenseType;
 import com.supper_note.services.shared.model.Auditable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -14,6 +12,7 @@ import java.math.BigDecimal;
 @Getter
 public class PersonalExpenseEntity extends Auditable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
 

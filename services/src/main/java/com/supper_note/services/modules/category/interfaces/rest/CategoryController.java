@@ -2,6 +2,7 @@ package com.supper_note.services.modules.category.interfaces.rest;
 
 import com.supper_note.services.modules.category.application.CategoryUseCase;
 import com.supper_note.services.modules.category.domain.model.Category;
+import com.supper_note.services.shared.base.application.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,27 +11,27 @@ import java.util.List;
 @RestController
 @RequestMapping(("/api/categories"))
 @AllArgsConstructor
-public class CategoryController {
+public class CategoryController implements BaseController<Category> {
     private final CategoryUseCase categoryUseCase;
-    private final Long userId = 1L;
 
-    @GetMapping
-    public List<Category> getAllCategories() {
+    @Override
+    public List<Category> getAll() {
+        Long userId = 1L;
         return categoryUseCase.getAll(userId);
     }
 
-    @GetMapping("{id}")
-    public Category getById(@PathVariable Long id) {
-        return categoryUseCase.getById(userId, id);
+    @Override
+    public Category getById(Long id) {
+        return categoryUseCase.getById(id);
     }
 
-    @PostMapping
-    public Category saveCategory(Category category) {
+    @Override
+    public Category save(Category category) {
         return categoryUseCase.save(category);
     }
 
-    @DeleteMapping("{id}")
-    public void deleteCategory(@PathVariable Long id) {
-        categoryUseCase.deleteById(userId, id);
+    @Override
+    public void delete(Long id) {
+        categoryUseCase.deleteById(id);
     }
 }

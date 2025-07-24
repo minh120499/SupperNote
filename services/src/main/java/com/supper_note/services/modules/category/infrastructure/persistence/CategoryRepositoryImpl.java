@@ -21,8 +21,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public Category getById(Long userId, Long id) {
-        var categoryEntities = categoryJpaRepository.findByUserIdAndId(userId, id);
+    public Category getById(Long id) {
+        var categoryEntities = categoryJpaRepository.findById(id);
         if (categoryEntities.isEmpty()) {
             throw new NotFoundException("User not found with id: " + id);
         }
@@ -37,7 +37,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public void deleteById(Long userId, Long id) {
-        categoryJpaRepository.deleteByUserIdAndId(userId, id);
+    public void deleteById(Long id) {
+        categoryJpaRepository.deleteById(id);
     }
 }

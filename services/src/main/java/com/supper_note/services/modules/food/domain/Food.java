@@ -2,6 +2,8 @@ package com.supper_note.services.modules.food.domain;
 
 import com.supper_note.services.shared.enums.BaseStatus;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 
@@ -12,6 +14,7 @@ import java.util.Date;
 @Getter
 public class Food {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;

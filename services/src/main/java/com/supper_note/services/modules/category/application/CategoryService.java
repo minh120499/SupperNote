@@ -22,8 +22,8 @@ public class CategoryService implements CategoryUseCase {
     }
 
     @Override
-    public Category getById(Long userId, Long id) {
-        return categoryRepository.getById(userId, id);
+    public Category getById(Long id) {
+        return categoryRepository.getById(id);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class CategoryService implements CategoryUseCase {
     }
 
     @Override
-    public void deleteById(Long userId, Long id) {
-        categoryRepository.deleteById(userId, id);
+    public void deleteById(Long id) {
+        categoryRepository.deleteById(id);
     }
 }
