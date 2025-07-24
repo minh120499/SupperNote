@@ -9,6 +9,4 @@ import java.util.Optional;
 @NoRepositoryBean
 public interface BaseJpaRepository<T, V> extends JpaRepository<T, V> {
     List<T> findAllByUserId(Long userId);
-//    Optional<T> findById(Long id);
-//    void deleteById(Long id);
 }

@@ -7,10 +7,13 @@ import {
 } from '@mantine/core'
 import { useForm } from '@tanstack/react-form'
 
+import { CategoryApi } from '@/api/CategoryApi'
 import {
   ExpenseType,
   type PersonalExpenses,
 } from '@/api/models/PersonalExpense'
+import PersonalExpenseApi from '@/api/PersonalExpenseApi'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 export const ExpensesCreatePage = () => {
   const form = useForm({
@@ -20,7 +23,7 @@ export const ExpensesCreatePage = () => {
       category: [],
       type: ExpenseType.EXPENSE,
       description: '',
-    } as PersonalExpenses,
+    } as unknown as PersonalExpenses,
     onSubmit: ({ value }) => {
       handleSubmit(value)
     },
@@ -29,6 +32,17 @@ export const ExpensesCreatePage = () => {
   const handleSubmit = (values: PersonalExpenses) => {
     console.log(values)
   }
+
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: CategoryApi.getCategories,
+  })
+
+  const { mutate: createPersonalExpense, isPending } = useMutation({
+    mutationFn: (values: PersonalExpenses) => {
+      return PersonalExpenseApi.createPersonalExpense(values)
+    },
+  })
 
   const { Field } = form
 
@@ -86,7 +100,8 @@ export const ExpensesCreatePage = () => {
               placeholder="Enter category"
               withAsterisk
               value={field.state.value}
-              onChange={event => field.handleChange(event.target.value)}
+              data={categories?.map(category => category.title) ?? []}
+              onChange={field.handleChange}
             />
           )
         }}

@@ -1,9 +1,11 @@
 package com.supper_note.services.modules.category.application;
 
+import com.supper_note.services.modules.category.application.dto.CategoryDTO;
 import com.supper_note.services.modules.category.domain.model.Category;
 import com.supper_note.services.modules.category.domain.service.CategoryDomainService;
 import com.supper_note.services.modules.category.domain.service.CategoryRepository;
 import com.supper_note.services.shared.exceptions.NotFoundException;
+import com.supper_note.services.shared.mapper.MapperUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +29,13 @@ public class CategoryService implements CategoryUseCase {
     }
 
     @Override
-    public Category save(Category category) {
-        if (categoryDomainService.isValid(category)) {
+    public CategoryDTO save(CategoryDTO request) {
+        if (categoryDomainService.isValid(request)) {
             throw new NotFoundException("Not found");
         }
-        return categoryRepository.save(category);
+        var category = MapperUtils.map(request, Category.class);
+        var entity = categoryRepository.save(category);
+        return MapperUtils.map(entity, CategoryDTO.class);
     }
 
     @Override

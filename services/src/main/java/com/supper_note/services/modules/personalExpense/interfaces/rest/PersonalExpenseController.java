@@ -1,7 +1,9 @@
 package com.supper_note.services.modules.personalExpense.interfaces.rest;
 
 import com.supper_note.services.modules.personalExpense.application.PersonalExpenseUseCase;
+import com.supper_note.services.modules.personalExpense.application.dto.PersonalExpenseDTO;
 import com.supper_note.services.modules.personalExpense.domain.model.PersonalExpense;
+import com.supper_note.services.shared.base.application.BaseController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,17 +15,27 @@ import java.util.List;
 @RestController
 @RequestMapping(("/api/personal_expense"))
 @AllArgsConstructor
-public class PersonalExpenseController {
+public class PersonalExpenseController implements BaseController<PersonalExpense, PersonalExpenseDTO> {
     private final PersonalExpenseUseCase personalExpenseUseCase;
 
-    @GetMapping
-    public List<PersonalExpense> getPersonalExpense() {
-        return personalExpenseUseCase.getAllPersonalExpense();
+
+    @Override
+    public List<PersonalExpense> getAll() {
+        return personalExpenseUseCase.getAll(1L);
     }
 
-    @GetMapping("/json-string-alt")
-    @ResponseBody // Đảm bảo phương thức này trả về dữ liệu trực tiếp, không phải view
-    public String getJsonString() {
-        return "{\"anotherMessage\": \"This is an alternative way!\"}";
+    @Override
+    public PersonalExpense getById(Long id) {
+        return personalExpenseUseCase.getById(id);
+    }
+
+    @Override
+    public PersonalExpenseDTO save(PersonalExpenseDTO request) {
+        return personalExpenseUseCase.save(request);
+    }
+
+    @Override
+    public void delete(Long id) {
+        personalExpenseUseCase.deleteById(id);
     }
 }

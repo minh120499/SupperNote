@@ -1,12 +1,11 @@
 package com.supper_note.services.shared.base.application;
 
-import com.supper_note.services.modules.category.domain.model.Category;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public interface BaseController<T> {
+public interface BaseController<T, K> {
     @GetMapping
     List<T> getAll();
 
@@ -14,7 +13,7 @@ public interface BaseController<T> {
     T getById(@PathVariable Long id);
 
     @PostMapping
-    T save(@RequestBody T category);
+    K save(@RequestBody K request);
 
     @DeleteMapping("{id}")
     void delete(@PathVariable Long id);

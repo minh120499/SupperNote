@@ -1,5 +1,6 @@
 package com.supper_note.services.modules.category.application;
 
+import com.supper_note.services.modules.category.application.dto.CategoryDTO;
 import com.supper_note.services.modules.category.domain.model.Category;
 import com.supper_note.services.modules.category.domain.service.CategoryDomainService;
 import com.supper_note.services.modules.category.domain.service.CategoryRepository;
@@ -31,6 +32,7 @@ class CategoryServiceTest {
     private CategoryService categoryService;
 
     private Category category;
+    private CategoryDTO categoryDTO;
     private final Long userId = 1L;
     private final Long categoryId = 1L;
 
@@ -75,11 +77,11 @@ class CategoryServiceTest {
     @DisplayName("Should throw NotFoundException when category is valid - BUG")
     void shouldThrowNotFoundExceptionWhenCategoryIsValid() {
         // Arrange
-        when(categoryDomainService.isValid(category)).thenReturn(true);
+        when(categoryDomainService.isValid(categoryDTO)).thenReturn(true);
 
         // Act & Assert
-        assertThrows(NotFoundException.class, () -> categoryService.save(category));
-        verify(categoryDomainService).isValid(category);
+        assertThrows(NotFoundException.class, () -> categoryService.save(categoryDTO));
+        verify(categoryDomainService).isValid(categoryDTO);
         verify(categoryRepository, never()).save(any(Category.class));
     }
 
@@ -87,15 +89,15 @@ class CategoryServiceTest {
     @DisplayName("Should save category when category is invalid - EXPECTED BEHAVIOR IF BUG IS FIXED")
     void shouldSaveCategoryWhenCategoryIsInvalid() {
         // Arrange
-        when(categoryDomainService.isValid(category)).thenReturn(false);
+        when(categoryDomainService.isValid(categoryDTO)).thenReturn(false);
         when(categoryRepository.save(category)).thenReturn(category);
 
         // Act
-        Category savedCategory = categoryService.save(category);
+        Category savedCategory = categoryService.save(categoryDTO);
 
         // Assert
         assertEquals(category, savedCategory);
-        verify(categoryDomainService).isValid(category);
+        verify(categoryDomainService).isValid(categoryDTO);
         verify(categoryRepository).save(category);
     }
 

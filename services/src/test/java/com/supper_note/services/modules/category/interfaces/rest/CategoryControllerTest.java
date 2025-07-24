@@ -2,6 +2,7 @@ package com.supper_note.services.modules.category.interfaces.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.supper_note.services.modules.category.application.CategoryUseCase;
+import com.supper_note.services.modules.category.application.dto.CategoryDTO;
 import com.supper_note.services.modules.category.domain.model.Category;
 import com.supper_note.services.shared.exceptions.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -97,12 +98,12 @@ class CategoryControllerTest {
     void shouldSaveCategory() throws Exception {
         // Arrange
         Category mockInputCategory = mock(Category.class);
-        Category mockOutputCategory = mock(Category.class);
+        CategoryDTO mockOutputCategory = mock(CategoryDTO.class);
         when(mockOutputCategory.getTitle()).thenReturn("Saved Category");
         
         // Note: There's a potential issue in the controller - @RequestBody annotation is missing
         // This test might fail due to that issue
-        when(categoryUseCase.save(any(Category.class))).thenReturn(mockOutputCategory);
+        when(categoryUseCase.save(any(CategoryDTO.class))).thenReturn(mockOutputCategory);
 
         // Act & Assert
         mockMvc.perform(post("/api/categories")
@@ -112,7 +113,7 @@ class CategoryControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.title", is("Saved Category")));
 
-        verify(categoryUseCase).save(any(Category.class));
+        verify(categoryUseCase).save(any(CategoryDTO.class));
     }
 
     @Test

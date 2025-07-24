@@ -23,6 +23,7 @@ function RouteComponent() {
   const [scaleOut, setScaleOut] = useState(0)
 
   window.addEventListener('scroll', event => {
+    console.log(event, lastScrollTop)
     const currentScroll = window.pageYOffset
 
     setPageYOffset(currentScroll)
@@ -35,7 +36,9 @@ function RouteComponent() {
     // }
   })
 
-  window.addEventListener('wheel', (event: WheelEvent) => {})
+  window.addEventListener('wheel', (event: WheelEvent) => {
+    console.log(event)
+  })
 
   return (
     <Box h={5000} ref={containerRef} pos="relative">
