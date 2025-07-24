@@ -30,7 +30,7 @@ export const ExpensesCreatePage = () => {
   })
 
   const handleSubmit = (values: PersonalExpenses) => {
-    console.log(values)
+    createPersonalExpense(values)
   }
 
   const { data: categories } = useQuery({
@@ -121,7 +121,7 @@ export const ExpensesCreatePage = () => {
         }}
       />
 
-      <Button onClick={form.handleSubmit}>Add</Button>
+      <Button loading={isPending} onClick={form.handleSubmit}>Add</Button>
     </div>
   )
 }
