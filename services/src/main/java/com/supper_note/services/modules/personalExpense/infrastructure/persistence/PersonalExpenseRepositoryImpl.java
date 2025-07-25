@@ -2,6 +2,7 @@ package com.supper_note.services.modules.personalExpense.infrastructure.persiste
 
 import com.supper_note.services.modules.personalExpense.domain.model.PersonalExpense;
 import com.supper_note.services.modules.personalExpense.domain.service.PersonalExpenseRepository;
+import com.supper_note.services.shared.exceptions.NotFoundException;
 import com.supper_note.services.shared.mapper.MapperUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,16 +22,22 @@ public class PersonalExpenseRepositoryImpl implements PersonalExpenseRepository 
 
     @Override
     public PersonalExpense getById(Long id) {
-        return null;
+        var entity = personalExpenseJpaRepository.findById(id);
+        if(entity.isEmpty()){
+            throw  new NotFoundException("Personal Expense not found with id: " + id);
+        }
+        return MapperUtils.map(entity.get(), PersonalExpense.class);
     }
 
     @Override
     public PersonalExpense save(PersonalExpense model) {
-        return null;
+        var request = MapperUtils.map(model, PersonalExpenseEntity.class);
+        var entity = personalExpenseJpaRepository.save(request);
+        return MapperUtils.map(entity, PersonalExpense.class)   ;
     }
 
     @Override
     public void deleteById(Long id) {
-
+        personalExpenseJpaRepository.deleteById(id);
     }
 }

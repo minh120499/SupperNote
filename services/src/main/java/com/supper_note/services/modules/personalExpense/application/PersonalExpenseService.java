@@ -25,7 +25,7 @@ public class PersonalExpenseService implements PersonalExpenseUseCase {
 
     @Override
     public PersonalExpense getById(Long id) {
-        return null;
+        return personalExpenseRepository.getById(id);
     }
 
     @Override

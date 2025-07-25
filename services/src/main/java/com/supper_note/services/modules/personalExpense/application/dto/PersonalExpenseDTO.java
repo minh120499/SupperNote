@@ -1,8 +1,10 @@
 package com.supper_note.services.modules.personalExpense.application.dto;
 
+import com.supper_note.services.modules.category.application.dto.CategoryDTO;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 public class PersonalExpenseDTO {
@@ -10,6 +12,6 @@ public class PersonalExpenseDTO {
     private String title;
     private BigDecimal amount;
     private String type;
-    private String category;
+    private List<CategoryDTO> category;
     private String description;
 }
