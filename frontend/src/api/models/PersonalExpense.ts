@@ -1,14 +1,26 @@
+import type { Category } from './Category'
+
 export enum ExpenseType {
-  INCOME = 'income',
-  EXPENSE = 'expense',
+  INCOME = 'INCOME',
+  EXPENSE = 'EXPENSE',
 }
 
-export type PersonalExpenses = {
+export type PersonalExpensesRequest = {
+  id?: number
+  userId?: number
+  title: string
+  amount: number
+  type: ExpenseType
+  category: string
+  description?: string
+}
+
+export type PersonalExpensesResponse = {
   id: number
   userId: number
   title: string
   amount: number
   type: ExpenseType
-  categories: string[]
+  category: Category
   description?: string
 }

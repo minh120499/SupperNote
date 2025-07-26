@@ -5,9 +5,9 @@ import com.supper_note.services.modules.personalExpense.application.request.Pers
 import com.supper_note.services.modules.personalExpense.application.response.PersonalExpenseResponse;
 import com.supper_note.services.modules.personalExpense.domain.model.PersonalExpense;
 import com.supper_note.services.shared.base.application.BaseController;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,7 +36,7 @@ public class PersonalExpenseController implements BaseController<PersonalExpense
     }
 
     @PostMapping
-    public PersonalExpenseResponse save(@Valid PersonalExpenseRequest request) {
+    public PersonalExpenseResponse save(@RequestBody PersonalExpenseRequest request) {
         return personalExpenseUseCase.save(request);
     }
 }

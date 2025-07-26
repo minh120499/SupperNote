@@ -1,6 +1,5 @@
 package com.supper_note.services.modules.category.infrastructure.persistence;
 
-import com.supper_note.services.modules.category.domain.model.Category;
 import com.supper_note.services.modules.category.domain.service.CategoryRepository;
 import com.supper_note.services.shared.exceptions.NotFoundException;
 import com.supper_note.services.shared.mapper.MapperUtils;
@@ -18,32 +17,20 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private final CategoryJpaRepository categoryJpaRepository;
 
     @Override
-    public List<Category> getAll(Long userId) {
-        var categoryEntities = categoryJpaRepository.findAllByUserId(userId);
-        return MapperUtils.mapList(categoryEntities, Category.class);
+    public List<CategoryEntity> getAll(Long userId) {
+        return categoryJpaRepository.findAllByUserId(userId);
     }
 
     @Override
-    public Category getById(Long id) {
+    public CategoryEntity getById(Long id) {
         var categoryEntities = categoryJpaRepository.findById(id);
         if (categoryEntities.isEmpty()) {
             throw new NotFoundException("User not found with id: " + id);
         }
-        return MapperUtils.map(categoryEntities.get(), Category.class);
+        return categoryEntities.get();
     }
 
     @Override
-    public Category save(Category model) {
-        var category = MapperUtils.map(model, CategoryEntity.class);
-        var categoryEntity = categoryJpaRepository.save(category);
-        return MapperUtils.map(categoryEntity, Category.class);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        categoryJpaRepository.deleteById(id);
-    }
-
     @Transactional
     public List<CategoryEntity> saveCategoriesIfNotExists(List<String> categoryTitles) {
 
@@ -58,17 +45,13 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         // 3. Lọc ra các categoryTitle chưa tồn tại trong DB
         List<String> newCategoryTitles = categoryTitles.stream()
                 .filter(title -> !existingTitles.contains(title))
-                .collect(Collectors.toList());
+                .toList();
 
         // 4. Tạo các CategoryEntity mới từ các title chưa tồn tại
         List<CategoryEntity> newCategoryEntities = newCategoryTitles.stream()
                 .map(title -> {
                     CategoryEntity newCategory = new CategoryEntity();
-                    // Lưu ý: Bạn cần set thêm userId, type, description nếu cần
-//                    newCategory.setUserId(userId); // Giả sử userId được truyền vào hoặc lấy từ ngữ cảnh
-//                    newCategory.setTitle(title);
-                    // newCategory.setType("default_type"); // Set giá trị mặc định nếu cần
-                    // newCategory.setDescription("default_description"); // Set giá trị mặc định nếu cần
+                    newCategory.setTitle(title);
                     return newCategory;
                 })
                 .collect(Collectors.toList());
@@ -81,5 +64,27 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         existingCategories.addAll(savedNewCategories);
 
         return existingCategories;
+    }
+
+    @Override
+    public CategoryEntity saveCategoryIfNotExists(String categoryTitle) {
+        CategoryEntity existingCategory = categoryJpaRepository.findByTitle(categoryTitle).orElse(new CategoryEntity());
+        if (existingCategory.getId() != null) {
+            return existingCategory;
+        }
+        existingCategory.setTitle(categoryTitle);
+        existingCategory.setUserId(1L);
+        return categoryJpaRepository.save(existingCategory);
+    }
+
+    @Override
+    public CategoryEntity save(CategoryEntity model) {
+        var category = MapperUtils.map(model, CategoryEntity.class);
+        return categoryJpaRepository.save(category);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        categoryJpaRepository.deleteById(id);
     }
 }

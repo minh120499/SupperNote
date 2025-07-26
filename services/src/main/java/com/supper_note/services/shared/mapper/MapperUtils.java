@@ -1,13 +1,20 @@
 package com.supper_note.services.shared.mapper;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.modelmapper.convention.MatchingStrategies;
 
+import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,9 +33,18 @@ public class MapperUtils {
                 .setMatchingStrategy(MatchingStrategies.STRICT)
                 .setSkipNullEnabled(true);
 
-        objectMapper = new ObjectMapper();
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper = new ObjectMapper()
+                .enable(SerializationFeature.WRAP_ROOT_VALUE)
+                .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
+                .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .registerModule(new SimpleModule()
+                        .addSerializer(Instant.class, new InstantSerializer())
+                        .addSerializer(LocalDate.class, new LocalDateSerializer())
+                        .addDeserializer(Instant.class, new InstantDeserializer())
+                        .addDeserializer(LocalDate.class, new LocalDateDeserializer()))
+                .registerModule(new JavaTimeModule());
     }
 
     private MapperUtils() {
@@ -125,6 +141,42 @@ public class MapperUtils {
             // Log lỗi hoặc ném ngoại lệ RuntimeException
             System.err.println("Error converting JSON to object: " + e.getMessage());
             return null; // Hoặc throw new RuntimeException("Error converting JSON to object", e);
+        }
+    }
+
+    private static class InstantSerializer extends JsonSerializer<Instant> {
+        @Override
+        public void serialize(Instant value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+            gen.writeString(value.toString());
+        }
+    }
+
+    private static class InstantDeserializer extends JsonDeserializer<Instant> {
+        @Override
+        public Instant deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            try {
+                return Instant.parse(p.getValueAsString());
+            } catch (DateTimeParseException e) {
+                throw new JsonParseException(p, "Invalid instant format", e);
+            }
+        }
+    }
+
+    private static class LocalDateSerializer extends JsonSerializer<LocalDate> {
+        @Override
+        public void serialize(LocalDate value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+            gen.writeString(value.toString());
+        }
+    }
+
+    private static class LocalDateDeserializer extends JsonDeserializer<LocalDate> {
+        @Override
+        public LocalDate deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            try {
+                return LocalDate.parse(p.getValueAsString());
+            } catch (DateTimeParseException e) {
+                throw new JsonParseException(p, "Invalid local date format", e);
+            }
         }
     }
 }

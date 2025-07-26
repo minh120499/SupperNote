@@ -1,19 +1,20 @@
 package com.supper_note.services.modules.personalExpense.application.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.supper_note.services.shared.enums.ExpenseType;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Getter
+@Setter
+@JsonRootName("_")
 public class PersonalExpenseRequest {
-    private Long userId;
-    @NotNull
+    private Long userId = 1L;
     private String title;
     private BigDecimal amount;
-    private String type;
-    private List<String> categories;
+    private ExpenseType type;
+    private String category;
     private String description;
 }

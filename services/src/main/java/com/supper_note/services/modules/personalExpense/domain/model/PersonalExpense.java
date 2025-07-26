@@ -16,6 +16,6 @@ public class PersonalExpense {
     private String title;
     private BigDecimal amount;
     private ExpenseType type;
-    private List<Category> categories;
+    private Category category;
     private String description;
 }

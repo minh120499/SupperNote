@@ -5,6 +5,7 @@ import com.supper_note.services.modules.category.application.response.CategoryRe
 import com.supper_note.services.modules.category.domain.model.Category;
 import com.supper_note.services.modules.category.domain.service.CategoryDomainService;
 import com.supper_note.services.modules.category.domain.service.CategoryRepository;
+import com.supper_note.services.modules.category.infrastructure.persistence.CategoryEntity;
 import com.supper_note.services.shared.exceptions.NotFoundException;
 import com.supper_note.services.shared.mapper.MapperUtils;
 import lombok.AllArgsConstructor;
@@ -21,12 +22,14 @@ public class CategoryService implements CategoryUseCase {
 
     @Override
     public List<Category> getAll(Long userId) {
-        return categoryRepository.getAll(userId);
+        List<CategoryEntity> categoryEntities = categoryRepository.getAll(userId);
+        return MapperUtils.mapList(categoryEntities, Category.class);
     }
 
     @Override
     public Category getById(Long id) {
-        return categoryRepository.getById(id);
+        CategoryEntity categoryEntity = categoryRepository.getById(id);
+        return MapperUtils.map(categoryEntity, Category.class);
     }
 
     @Override
@@ -38,13 +41,21 @@ public class CategoryService implements CategoryUseCase {
         if (categoryDomainService.isValid(request)) {
             throw new NotFoundException("Not found");
         }
-        var category = MapperUtils.map(request, Category.class);
+        var category = MapperUtils.map(request, CategoryEntity.class);
         var entity = categoryRepository.save(category);
         return MapperUtils.map(entity, CategoryResponse.class);
     }
 
-    public List<Category> saveAll(List<String> categoryTitles) {
-        categoryRepository.
-        return null;
+    public CategoryResponse save(String categoryTitle) {
+        if (categoryTitle == null || categoryTitle.isBlank()) {
+            throw new NotFoundException("Category Title not empty");
+        }
+        var entity = categoryRepository.saveCategoryIfNotExists(categoryTitle);
+        return MapperUtils.map(entity, CategoryResponse.class);
+    }
+
+    public List<CategoryResponse> saveAll(List<String> categoryTitles) {
+        List<CategoryEntity> categoryEntities = categoryRepository.saveCategoriesIfNotExists(categoryTitles);
+        return MapperUtils.mapList(categoryEntities, CategoryResponse.class);
     }
 }
