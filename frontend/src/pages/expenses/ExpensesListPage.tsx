@@ -4,17 +4,14 @@ import { useQuery } from '@tanstack/react-query'
 import PersonalExpenseApi from '@/api/PersonalExpenseApi'
 import { appRouter } from '@/main'
 
+import { ExpensesOverviewPage } from './ExpensesOverviewPage'
+
 export const ExpensesListPage = () => {
   const { data: personalExpenses } = useQuery({
     queryKey: [],
     queryFn: PersonalExpenseApi.fetchPersonalExpenses,
     refetchOnWindowFocus: false,
-    retry: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
   })
-
-  console.log(personalExpenses)
 
   const handleAddExpense = () => {
     appRouter.navigate({
@@ -22,7 +19,8 @@ export const ExpensesListPage = () => {
     })
   }
   return (
-    <div>
+    <>
+      <ExpensesOverviewPage />
       <Flex direction="column" gap="md" wrap="wrap">
         {personalExpenses?.map(expense => (
           <Paper withBorder key={expense.id}>
@@ -37,6 +35,6 @@ export const ExpensesListPage = () => {
         ))}
       </Flex>
       <Button onClick={handleAddExpense}>Add</Button>
-    </div>
+    </>
   )
 }
