@@ -9,6 +9,6 @@ export type PersonalExpenses = {
   title: string
   amount: number
   type: ExpenseType
-  category: string[]
+  categories: string[]
   description?: string
 }

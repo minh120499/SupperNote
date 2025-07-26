@@ -1,6 +1,7 @@
 package com.supper_note.services.modules.category.application;
 
-import com.supper_note.services.modules.category.application.dto.CategoryDTO;
+import com.supper_note.services.modules.category.application.request.CategoryRequest;
+import com.supper_note.services.modules.category.application.response.CategoryResponse;
 import com.supper_note.services.modules.category.domain.model.Category;
 import com.supper_note.services.modules.category.domain.service.CategoryDomainService;
 import com.supper_note.services.modules.category.domain.service.CategoryRepository;
@@ -29,17 +30,21 @@ public class CategoryService implements CategoryUseCase {
     }
 
     @Override
-    public CategoryDTO save(CategoryDTO request) {
+    public void deleteById(Long id) {
+        categoryRepository.deleteById(id);
+    }
+
+    public CategoryResponse save(CategoryRequest request) {
         if (categoryDomainService.isValid(request)) {
             throw new NotFoundException("Not found");
         }
         var category = MapperUtils.map(request, Category.class);
         var entity = categoryRepository.save(category);
-        return MapperUtils.map(entity, CategoryDTO.class);
+        return MapperUtils.map(entity, CategoryResponse.class);
     }
 
-    @Override
-    public void deleteById(Long id) {
-        categoryRepository.deleteById(id);
+    public List<Category> saveAll(List<String> categoryTitles) {
+        categoryRepository.
+        return null;
     }
 }

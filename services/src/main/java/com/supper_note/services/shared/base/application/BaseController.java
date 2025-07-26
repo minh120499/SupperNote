@@ -5,15 +5,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public interface BaseController<T, K> {
+public interface BaseController<T> {
     @GetMapping
     List<T> getAll();
 
     @GetMapping("{id}")
     T getById(@PathVariable Long id);
-
-    @PostMapping
-    K save(@RequestBody K request);
 
     @DeleteMapping("{id}")
     void delete(@PathVariable Long id);

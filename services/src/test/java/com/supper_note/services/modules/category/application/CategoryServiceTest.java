@@ -1,6 +1,6 @@
 package com.supper_note.services.modules.category.application;
 
-import com.supper_note.services.modules.category.application.dto.CategoryDTO;
+import com.supper_note.services.modules.category.application.request.CategoryRequest;
 import com.supper_note.services.modules.category.domain.model.Category;
 import com.supper_note.services.modules.category.domain.service.CategoryDomainService;
 import com.supper_note.services.modules.category.domain.service.CategoryRepository;
@@ -32,7 +32,7 @@ class CategoryServiceTest {
     private CategoryService categoryService;
 
     private Category category;
-    private CategoryDTO categoryDTO;
+    private CategoryRequest categoryDTO;
     private final Long userId = 1L;
     private final Long categoryId = 1L;
 

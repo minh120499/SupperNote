@@ -1,7 +1,8 @@
 package com.supper_note.services.modules.category.interfaces.rest;
 
 import com.supper_note.services.modules.category.application.CategoryUseCase;
-import com.supper_note.services.modules.category.application.dto.CategoryDTO;
+import com.supper_note.services.modules.category.application.request.CategoryRequest;
+import com.supper_note.services.modules.category.application.response.CategoryResponse;
 import com.supper_note.services.modules.category.domain.model.Category;
 import com.supper_note.services.shared.base.application.BaseController;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(("/api/categories"))
 @AllArgsConstructor
-public class CategoryController implements BaseController<Category, CategoryDTO> {
+public class CategoryController implements BaseController<Category> {
     private final CategoryUseCase categoryUseCase;
 
     @Override
@@ -27,12 +28,12 @@ public class CategoryController implements BaseController<Category, CategoryDTO>
     }
 
     @Override
-    public CategoryDTO save(CategoryDTO category) {
-        return categoryUseCase.save(category);
-    }
-
-    @Override
     public void delete(Long id) {
         categoryUseCase.deleteById(id);
+    }
+
+    @PostMapping
+    public CategoryResponse save(CategoryRequest category) {
+        return categoryUseCase.save(category);
     }
 }

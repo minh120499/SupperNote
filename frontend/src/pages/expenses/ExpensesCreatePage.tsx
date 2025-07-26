@@ -6,21 +6,21 @@ import {
   TextInput,
 } from '@mantine/core'
 import { useForm } from '@tanstack/react-form'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 import { CategoryApi } from '@/api/CategoryApi'
+import PersonalExpenseApi from '@/api/PersonalExpenseApi'
 import {
   ExpenseType,
   type PersonalExpenses,
 } from '@/api/models/PersonalExpense'
-import PersonalExpenseApi from '@/api/PersonalExpenseApi'
-import { useMutation, useQuery } from '@tanstack/react-query'
 
 export const ExpensesCreatePage = () => {
   const form = useForm({
     defaultValues: {
       title: '',
       amount: 0,
-      category: [],
+      categories: [],
       type: ExpenseType.EXPENSE,
       description: '',
     } as unknown as PersonalExpenses,
@@ -36,6 +36,7 @@ export const ExpensesCreatePage = () => {
   const { data: categories } = useQuery({
     queryKey: ['categories'],
     queryFn: CategoryApi.getCategories,
+    refetchOnWindowFocus: false,
   })
 
   const { mutate: createPersonalExpense, isPending } = useMutation({
@@ -92,7 +93,7 @@ export const ExpensesCreatePage = () => {
       />
 
       <Field
-        name="category"
+        name="categories"
         children={field => {
           return (
             <TagsInput
@@ -121,7 +122,9 @@ export const ExpensesCreatePage = () => {
         }}
       />
 
-      <Button loading={isPending} onClick={form.handleSubmit}>Add</Button>
+      <Button loading={isPending} onClick={form.handleSubmit}>
+        Add
+      </Button>
     </div>
   )
 }

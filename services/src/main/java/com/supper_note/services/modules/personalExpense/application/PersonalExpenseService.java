@@ -1,6 +1,8 @@
 package com.supper_note.services.modules.personalExpense.application;
 
-import com.supper_note.services.modules.personalExpense.application.dto.PersonalExpenseDTO;
+import com.supper_note.services.modules.category.application.CategoryService;
+import com.supper_note.services.modules.personalExpense.application.request.PersonalExpenseRequest;
+import com.supper_note.services.modules.personalExpense.application.response.PersonalExpenseResponse;
 import com.supper_note.services.modules.personalExpense.domain.model.PersonalExpense;
 import com.supper_note.services.modules.personalExpense.domain.service.PersonalExpenseDomainService;
 import com.supper_note.services.modules.personalExpense.domain.service.PersonalExpenseRepository;
@@ -15,6 +17,7 @@ import java.util.List;
 public class PersonalExpenseService implements PersonalExpenseUseCase {
 
     private final PersonalExpenseRepository personalExpenseRepository;
+    private final CategoryService categoryService;
     private final PersonalExpenseDomainService personalExpenseDomainService;
 
     @Override
@@ -29,12 +32,13 @@ public class PersonalExpenseService implements PersonalExpenseUseCase {
     }
 
     @Override
-    public PersonalExpenseDTO save(PersonalExpenseDTO request) {
-        return null;
+    public void deleteById(Long id) {
+
     }
 
     @Override
-    public void deleteById(Long id) {
+    public PersonalExpenseResponse save(PersonalExpenseRequest request) {
 
+        return null;
     }
 }
